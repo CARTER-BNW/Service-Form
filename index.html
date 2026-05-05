@@ -20,17 +20,34 @@
         font-weight: 700;
     }
 
-    .service-block {
-        max-width: 900px;
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        max-width: 1000px;
         margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    .service-card {
+        background: #1a1a1a;
         padding: 20px;
+        border-radius: 12px;
+        border: 1px solid #333;
+        transition: 0.25s;
+    }
+
+    .service-card:hover {
+        background: #222;
+        border-color: #666;
+        transform: translateY(-3px);
     }
 
     .hero-image {
         width: 100%;
-        height: 250px;
-        background: #1a1a1a url('your-image.jpg') center/cover no-repeat;
-        border-radius: 12px;
+        height: 200px;
+        background: #0d0d0d url('your-image.jpg') center/cover no-repeat;
+        border-radius: 10px;
         border: 1px solid #333;
         margin-bottom: 20px;
     }
@@ -38,19 +55,18 @@
     .button {
         display: inline-block;
         padding: 15px 25px;
-        background: #1a1a1a;
+        background: #333;
         color: #fff;
         text-decoration: none;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         border-radius: 10px;
-        border: 1px solid #333;
+        border: 1px solid #444;
         transition: 0.25s;
     }
 
     .button:hover {
-        background: #222;
+        background: #444;
         border-color: #666;
-        transform: translateY(-3px);
     }
 </style>
 </head>
@@ -59,24 +75,28 @@
 
 <header>Available Services</header>
 
-<div class="service-block">
-    <div class="hero-image"></div>
-    <a class="button" href="wedding.html">Wedding</a>
-</div>
+<div class="grid">
 
-<div class="service-block">
-    <div class="hero-image"></div>
-    <a class="button" href="model.html">Model Shoot</a>
-</div>
+    <div class="service-card">
+        <div class="hero-image"></div>
+        <a class="button" href="wedding.html">Wedding</a>
+    </div>
 
-<div class="service-block">
-    <div class="hero-image"></div>
-    <a class="button" href="headshots.html">Headshots</a>
-</div>
+    <div class="service-card">
+        <div class="hero-image"></div>
+        <a class="button" href="model.html">Model Shoot</a>
+    </div>
 
-<div class="service-block">
-    <div class="hero-image"></div>
-    <a class="button" href="events.html">Events</a>
+    <div class="service-card">
+        <div class="hero-image"></div>
+        <a class="button" href="headshots.html">Headshots</a>
+    </div>
+
+    <div class="service-card">
+        <div class="hero-image"></div>
+        <a class="button" href="events.html">Events</a>
+    </div>
+
 </div>
 
 </body>
