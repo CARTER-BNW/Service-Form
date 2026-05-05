@@ -3,64 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Select Package</title>
+<title>Model Packages</title>
 
 <style>
-    body {
-        margin: 0;
-        font-family: "Inter", sans-serif;
-        background: #0d0d0d;
-        color: #f2f2f2;
-        text-align: center;
-    }
-
-    header {
-        padding: 40px 20px;
-        font-size: 2rem;
-        font-weight: 700;
-    }
-
-    .package {
-        background: #1a1a1a;
-        margin: 20px auto;
-        padding: 25px;
-        max-width: 600px;
-        border-radius: 12px;
-        border: 1px solid #333;
-        transition: 0.25s;
-        cursor: pointer;
-    }
-
-    .package:hover {
-        background: #222;
-        border-color: #666;
-        transform: translateY(-3px);
-    }
-
-    .package h2 {
-        margin: 0 0 10px;
-    }
+    body { margin:0; font-family:"Inter",sans-serif; background:#0d0d0d; color:#fff; text-align:center; }
+    .back { position:absolute; left:20px; top:20px; color:#fff; text-decoration:none; font-size:0.95rem; }
+    header { padding:40px 20px 5px; font-size:2.2rem; font-weight:700; }
+    .step { font-size:1rem; color:#ccc; margin-bottom:20px; }
+    .grid { max-width:900px; margin:40px auto; padding:0 20px; display:grid; gap:30px; }
+    .pkg { background:#1a1a1a; padding:30px; border-radius:16px; border:1px solid #333; cursor:pointer; transition:0.25s; }
+    .pkg:hover { background:#222; }
+    .pkg-title { font-size:1.6rem; font-weight:700; margin-bottom:10px; }
+    .pkg-desc { font-size:1rem; color:#ccc; margin-bottom:20px; }
 </style>
 </head>
 
 <body>
 
-<header>Select Your Package</header>
+<a class="back" href="index.html">← Back</a>
+<header>Model Packages</header>
+<div class="step">Step 2 of 6 — Select Package</div>
 
-<a class="package" href="calendar.html?package=basic">
-    <h2>Basic Package</h2>
-    <p>4 hours • 200+ edited photos</p>
-</a>
+<div class="grid">
+    <div class="pkg" data-package="Model Quick Shoot">
+        <div class="pkg-title">Quick Shoot</div>
+        <div class="pkg-desc">30 minutes • 20 edited photos</div>
+    </div>
 
-<a class="package" href="calendar.html?package=halfday">
-    <h2>Half‑Day Package</h2>
-    <p>6 hours • 500+ edited photos</p>
-</a>
+    <div class="pkg" data-package="Model Standard Shoot">
+        <div class="pkg-title">Standard Shoot</div>
+        <div class="pkg-desc">1 hour • 40 edited photos</div>
+    </div>
 
-<a class="package" href="calendar.html?package=fullday">
-    <h2>Full‑Day Package</h2>
-    <p>12 hours • 800+ edited photos</p>
-</a>
+    <div class="pkg" data-package="Model Creative Shoot">
+        <div class="pkg-title">Creative Shoot</div>
+        <div class="pkg-desc">2 hours • 80 edited photos</div>
+    </div>
+</div>
+
+<script>
+document.querySelectorAll('.pkg').forEach(pkg => {
+    pkg.addEventListener('click', () => {
+        localStorage.setItem('service', 'Model Shoot');
+        localStorage.setItem('package', pkg.getAttribute('data-package'));
+        window.location.href = "calendar.html";
+    });
+});
+</script>
 
 </body>
 </html>
