@@ -13,35 +13,24 @@
         color: #f2f2f2;
         text-align: center;
     }
-
+    .back {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        color: #f2f2f2;
+        text-decoration: none;
+        font-size: 0.95rem;
+    }
     header {
-        padding: 40px 20px;
+        padding: 40px 20px 5px;
         font-size: 2.2rem;
         font-weight: 700;
     }
-    /* DESKTOP — Bigger date + time text */
-    @media (min-width: 701px) {
-    
-        .day {
-            font-size: 1.5rem;   /* bigger date numbers */
-            padding: 22px;       /* slightly larger boxes */
-        }
-    
-        .calendar-header {
-            font-size: 1.8rem;   /* bigger month title */
-        }
-    
-        .time-container h2 {
-            font-size: 2rem;     /* bigger "Select Start Time" */
-        }
-    
-        .time-slot {
-            font-size: 2rem;   /* bigger time text */
-            padding: 18px;
-        }
+    .step {
+        font-size: 1rem;
+        color: #ccc;
+        margin-bottom: 20px;
     }
-
-    /* Bigger calendar container */
     .calendar-container {
         width: 95%;
         max-width: 700px;
@@ -53,12 +42,10 @@
         animation: fadeIn 0.6s ease;
         box-sizing: border-box;
     }
-
     @keyframes fadeIn {
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
     }
-
     .calendar-header {
         display: flex;
         justify-content: space-between;
@@ -67,7 +54,6 @@
         font-size: 1.4rem;
         font-weight: 600;
     }
-
     .calendar-header button {
         background: #333;
         border: none;
@@ -77,12 +63,7 @@
         cursor: pointer;
         transition: 0.25s;
     }
-
-    .calendar-header button:hover {
-        background: #444;
-    }
-
-    /* Calendar grid */
+    .calendar-header button:hover { background: #444; }
     .calendar-grid {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
@@ -90,9 +71,8 @@
         width: 100%;
         box-sizing: border-box;
     }
-
     .day {
-        aspect-ratio: 1 / 1; /* PERFECT SQUARES */
+        aspect-ratio: 1 / 1;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -103,19 +83,13 @@
         transition: 0.25s;
         font-size: 1.2rem;
     }
-
-    .day:hover {
-        background: #222;
-    }
-
+    .day:hover { background: #222; }
     .day.selected {
         background: #ffffff;
         color: #000;
         border-color: #fff;
         font-weight: 700;
     }
-
-    /* Time container */
     .time-container {
         width: 95%;
         max-width: 700px;
@@ -127,12 +101,10 @@
         animation: fadeIn 0.6s ease;
         box-sizing: border-box;
     }
-
     .time-container h2 {
         margin-bottom: 20px;
         font-size: 1.6rem;
     }
-
     .time-slot {
         padding: 14px;
         margin: 8px 0;
@@ -141,20 +113,15 @@
         border: 1px solid #333;
         cursor: pointer;
         transition: 0.25s;
-        font-size: 2rem;
+        font-size: 1.1rem;
     }
-
-    .time-slot:hover {
-        background: #222;
-    }
-
+    .time-slot:hover { background: #222; }
     .time-slot.selected {
         background: #ffffff;
         color: #000;
         border-color: #fff;
         font-weight: 700;
     }
-
     .button {
         display: block;
         margin: 40px auto;
@@ -166,43 +133,29 @@
         border-radius: 12px;
         font-size: 1.3rem;
         transition: 0.25s;
+        cursor: pointer;
     }
-
-    .button:hover {
-        background: #444;
-    }
-
-    /* MOBILE FIXES */
+    .button:hover { background: #444; }
     @media (max-width: 700px) {
-
-        .calendar-container {
-            padding: 20px;
-        }
-
-        .calendar-grid {
-            gap: 8px;
-        }
-
-        .day {
-            font-size: 1rem;
-            border-radius: 8px;
-        }
-
-        .time-container {
-            padding: 20px;
-        }
-
-        .time-slot {
-            padding: 12px;
-            font-size: 1rem;
-        }
+        .calendar-container { padding: 20px; }
+        .calendar-grid { gap: 8px; }
+        .day { font-size: 1rem; border-radius: 8px; }
+        .time-container { padding: 20px; }
+        .time-slot { padding: 12px; font-size: 1rem; }
+    }
+    @media (min-width: 701px) {
+        .day { font-size: 1.5rem; padding: 22px; }
+        .calendar-header { font-size: 1.8rem; }
+        .time-container h2 { font-size: 2rem; }
+        .time-slot { font-size: 1.4rem; padding: 18px; }
     }
 </style>
 </head>
-
 <body>
 
+<a class="back" href="select-package.html">← Back</a>
 <header>Select Date & Time</header>
+<div class="step">Step 3 of 6 — Select Date & Time</div>
 
 <div class="calendar-container">
     <div class="calendar-header">
@@ -218,7 +171,7 @@
     <div id="timeSlots"></div>
 </div>
 
-<a class="button" href="contact.html">Next: Contact Details</a>
+<div class="button" id="nextBtn">Next: Contact Details</div>
 
 <script>
     let currentDate = new Date();
@@ -289,6 +242,18 @@
             });
         }
     }
+
+    document.getElementById("nextBtn").addEventListener("click", () => {
+        if (selectedDate && selectedTime) {
+            const d = selectedDate;
+            const dateString = d.toLocaleDateString();
+            localStorage.setItem("date", dateString);
+            localStorage.setItem("time", selectedTime);
+            window.location.href = "contact.html";
+        } else {
+            alert("Please select a date and time.");
+        }
+    });
 
     renderCalendar();
     renderTimeSlots();
