@@ -13,16 +13,19 @@
         color: #f2f2f2;
         text-align: center;
     }
+
     header {
-        padding: 30px 20px 5px;
-        font-size: 2.2rem;
+        padding: 40px 20px 10px;
+        font-size: 2.4rem;
         font-weight: 700;
     }
+
     .step {
         font-size: 1rem;
         color: #ccc;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
     }
+
     .grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -31,34 +34,41 @@
         margin: 40px auto;
         padding: 0 20px;
     }
+
     .service-button {
         position: relative;
         height: 340px;
         border-radius: 16px;
         overflow: hidden;
         cursor: pointer;
-        transition: transform 0.35s ease, box-shadow 0.35s ease;
         text-decoration: none;
         color: #fff;
         display: block;
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
     }
+
     .service-button:hover {
         transform: scale(1.05);
         box-shadow: 0 0 25px rgba(255, 255, 255, 0.18);
     }
+
+    /* Background images */
     .wedding-img  { background: url('wedding.jpg') center/cover no-repeat; }
     .model-img    { background: url('model.jpg') center/cover no-repeat; }
     .headshot-img { background: url('headshot.jpg') center/cover no-repeat; }
     .event-img    { background: url('event.jpg') center/cover no-repeat; }
+
     .overlay {
         position: absolute;
         inset: 0;
         background: rgba(0, 0, 0, 0.45);
         transition: background 0.3s ease;
     }
+
     .service-button:hover .overlay {
         background: rgba(0, 0, 0, 0.25);
     }
+
     .label {
         position: absolute;
         top: 50%;
@@ -69,39 +79,46 @@
         text-shadow: 0 0 12px rgba(0,0,0,0.7);
         pointer-events: none;
     }
+
     @media (max-width: 700px) {
         .grid { grid-template-columns: 1fr; }
         .service-button { height: 260px; }
     }
 </style>
 </head>
+
 <body>
 
 <header>Available Services</header>
 <div class="step">Step 1 of 6 — Select Service</div>
 
 <div class="grid">
-    <a href="select-package.html" class="service-button wedding-img" data-service="Wedding">
+
+    <a href="wedding.html" class="service-button wedding-img" data-service="Wedding">
         <div class="overlay"></div>
         <div class="label">Wedding</div>
     </a>
-    <a href="select-package.html" class="service-button model-img" data-service="Model Shoot">
+
+    <a href="model.html" class="service-button model-img" data-service="Model Shoot">
         <div class="overlay"></div>
         <div class="label">Model Shoot</div>
     </a>
-    <a href="select-package.html" class="service-button headshot-img" data-service="Headshots">
+
+    <a href="headshots.html" class="service-button headshot-img" data-service="Headshots">
         <div class="overlay"></div>
         <div class="label">Headshots</div>
     </a>
-    <a href="select-package.html" class="service-button event-img" data-service="Events">
+
+    <a href="events.html" class="service-button event-img" data-service="Events">
         <div class="overlay"></div>
         <div class="label">Events</div>
     </a>
+
 </div>
 
 <script>
 document.querySelectorAll('.service-button').forEach(btn => {
-    btn.addEventListener('click', e => {
+    btn.addEventListener('click', () => {
         const service = btn.getAttribute('data-service');
         localStorage.setItem('service', service);
     });
