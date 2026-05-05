@@ -13,13 +13,24 @@
         color: #fff;
         text-align: center;
     }
-
+    .back {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        color: #f2f2f2;
+        text-decoration: none;
+        font-size: 0.95rem;
+    }
     header {
-        padding: 40px 20px;
+        padding: 40px 20px 5px;
         font-size: 2.2rem;
         font-weight: 700;
     }
-
+    .step {
+        font-size: 1rem;
+        color: #ccc;
+        margin-bottom: 20px;
+    }
     .box {
         width: 95%;
         max-width: 600px;
@@ -32,22 +43,18 @@
         box-sizing: border-box;
         text-align: left;
     }
-
     @keyframes fadeIn {
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
     }
-
     .row {
         margin-bottom: 18px;
         font-size: 1.2rem;
     }
-
     .label {
         font-weight: 700;
         color: #ccc;
     }
-
     .button {
         display: block;
         margin: 40px auto;
@@ -60,17 +67,16 @@
         font-size: 1.3rem;
         transition: 0.25s;
         text-align: center;
+        cursor: pointer;
     }
-
-    .button:hover {
-        background: #444;
-    }
+    .button:hover { background: #444; }
 </style>
 </head>
-
 <body>
 
+<a class="back" href="contact.html">← Back</a>
 <header>Review Your Booking</header>
+<div class="step">Step 5 of 6 — Confirm Details</div>
 
 <div class="box">
     <div class="row"><span class="label">Service:</span> <span id="service"></span></div>
@@ -84,20 +90,65 @@
     <div class="row"><span class="label">Comments:</span> <span id="comments"></span></div>
 </div>
 
-<a class="button" href="booking-confirmed.html">Confirm Booking</a>
+<div class="button" id="confirmBtn">Confirm Booking</div>
 
 <script>
-    // Read data from localStorage (set on contact page)
-    document.getElementById("service").textContent  = localStorage.getItem("service")  || "";
-    document.getElementById("package").textContent  = localStorage.getItem("package")  || "";
-    document.getElementById("date").textContent     = localStorage.getItem("date")     || "";
-    document.getElementById("time").textContent     = localStorage.getItem("time")     || "";
-    document.getElementById("fname").textContent    = localStorage.getItem("fname")    || "";
-    document.getElementById("lname").textContent    = localStorage.getItem("lname")    || "";
-    document.getElementById("email").textContent    = localStorage.getItem("email")    || "";
-    document.getElementById("phone").textContent    = localStorage.getItem("phone")    || "";
-    document.getElementById("comments").textContent = localStorage.getItem("comments") || "";
+const data = {
+    service:  localStorage.getItem("service")  || "",
+    package:  localStorage.getItem("package")  || "",
+    date:     localStorage.getItem("date")     || "",
+    time:     localStorage.getItem("time")     || "",
+    fname:    localStorage.getItem("fname")    || "",
+    lname:    localStorage.getItem("lname")    || "",
+    email:    localStorage.getItem("email")    || "",
+    phone:    localStorage.getItem("phone")    || "",
+    comments: localStorage.getItem("comments") || ""
+};
+
+document.getElementById("service").textContent  = data.service;
+document.getElementById("package").textContent  = data.package;
+document.getElementById("date").textContent     = data.date;
+document.getElementById("time").textContent     = data.time;
+document.getElementById("fname").textContent    = data.fname;
+document.getElementById("lname").textContent    = data.lname;
+document.getElementById("email").textContent    = data.email;
+document.getElementById("phone").textContent    = data.phone;
+document.getElementById("comments").textContent = data.comments;
+
+document.getElementById("confirmBtn").addEventListener("click", () => {
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = "https://formsubmit.co/carter.bnw@gmail.com";
+
+    const addField = (name, value) => {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = name;
+        input.value = value;
+        form.appendChild(input);
+    };
+
+    addField("Service", data.service);
+    addField("Package", data.package);
+    addField("Date", data.date);
+    addField("Time", data.time);
+    addField("First Name", data.fname);
+    addField("Last Name", data.lname);
+    addField("Email", data.email);
+    addField("Phone", data.phone);
+    addField("Comments", data.comments);
+
+    // FormSubmit options
+    addField("_subject", "New Photography Booking");
+    addField("_cc", data.email); // send confirmation to client
+    // Replace with your real URL when deployed:
+    addField("_next", "https://yourdomain.com/booking-confirmed.html");
+
+    document.body.appendChild(form);
+    form.submit();
+});
 </script>
 
 </body>
 </html>
+
