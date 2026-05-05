@@ -16,29 +16,83 @@
 
     header {
         padding: 40px 20px;
-        font-size: 2rem;
+        font-size: 2.2rem;
         font-weight: 700;
     }
 
-    .package {
-        background: #1a1a1a;
-        margin: 20px auto;
-        padding: 25px;
-        max-width: 600px;
-        border-radius: 12px;
-        border: 1px solid #333;
-        transition: 0.25s;
+    /* Container for all packages */
+    .package-grid {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 0 20px;
+        display: grid;
+        gap: 30px;
+    }
+
+    /* Full-image button style */
+    .package-button {
+        position: relative;
+        height: 260px;
+        border-radius: 16px;
+        overflow: hidden;
         cursor: pointer;
+        display: block;
+        text-decoration: none;
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
     }
 
-    .package:hover {
-        background: #222;
-        border-color: #666;
-        transform: translateY(-3px);
+    .package-button:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
     }
 
-    .package h2 {
-        margin: 0 0 10px;
+    /* Background images (replace with your own) */
+    .basic-img    { background: url('basic.jpg') center/cover no-repeat; }
+    .halfday-img  { background: url('halfday.jpg') center/cover no-repeat; }
+    .fullday-img  { background: url('fullday.jpg') center/cover no-repeat; }
+
+    /* Dark overlay */
+    .overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        transition: background 0.3s ease;
+    }
+
+    .package-button:hover .overlay {
+        background: rgba(0, 0, 0, 0.25);
+    }
+
+    /* Text on image */
+    .label {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 1.8rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-shadow: 0 0 12px rgba(0,0,0,0.7);
+        pointer-events: none;
+    }
+
+    .subtext {
+        position: absolute;
+        top: 62%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #f2f2f2;
+        font-size: 1rem;
+        opacity: 0.9;
+        pointer-events: none;
+    }
+
+    /* Mobile */
+    @media (max-width: 700px) {
+        .package-button {
+            height: 220px;
+        }
     }
 </style>
 </head>
@@ -47,20 +101,27 @@
 
 <header>Select Your Package</header>
 
-<a class="package" href="calendar.html?package=basic">
-    <h2>Basic Package</h2>
-    <p>4 hours • 200+ edited photos</p>
-</a>
+<div class="package-grid">
 
-<a class="package" href="calendar.html?package=halfday">
-    <h2>Half‑Day Package</h2>
-    <p>6 hours • 500+ edited photos</p>
-</a>
+    <a href="calendar.html?package=basic" class="package-button basic-img">
+        <div class="overlay"></div>
+        <div class="label">Basic Package</div>
+        <div class="subtext">4 hours • 200+ edited photos</div>
+    </a>
 
-<a class="package" href="calendar.html?package=fullday">
-    <h2>Full‑Day Package</h2>
-    <p>12 hours • 800+ edited photos</p>
-</a>
+    <a href="calendar.html?package=halfday" class="package-button halfday-img">
+        <div class="overlay"></div>
+        <div class="label">Half‑Day Package</div>
+        <div class="subtext">6 hours • 500+ edited photos</div>
+    </a>
+
+    <a href="calendar.html?package=fullday" class="package-button fullday-img">
+        <div class="overlay"></div>
+        <div class="label">Full‑Day Package</div>
+        <div class="subtext">12 hours • 800+ edited photos</div>
+    </a>
+
+</div>
 
 </body>
 </html>
