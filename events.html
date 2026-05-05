@@ -3,125 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Select Package</title>
+<title>Event Packages</title>
 
 <style>
-    body {
-        margin: 0;
-        font-family: "Inter", sans-serif;
-        background: #0d0d0d;
-        color: #f2f2f2;
-        text-align: center;
-    }
-    .back {
-        position: absolute;
-        left: 20px;
-        top: 20px;
-        color: #f2f2f2;
-        text-decoration: none;
-        font-size: 0.95rem;
-    }
-    header {
-        padding: 40px 20px 5px;
-        font-size: 2.2rem;
-        font-weight: 700;
-    }
-    .step {
-        font-size: 1rem;
-        color: #ccc;
-        margin-bottom: 20px;
-    }
-    .package-grid {
-        max-width: 900px;
-        margin: 40px auto;
-        padding: 0 20px;
-        display: grid;
-        gap: 30px;
-    }
-    .package-button {
-        position: relative;
-        height: 260px;
-        border-radius: 16px;
-        overflow: hidden;
-        cursor: pointer;
-        display: block;
-        text-decoration: none;
-        transition: transform 0.35s ease, box-shadow 0.35s ease;
-        color: #fff;
-    }
-    .package-button:hover {
-        transform: scale(1.04);
-        box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
-    }
-    .basic-img    { background: url('basic.jpg') center/cover no-repeat; }
-    .halfday-img  { background: url('halfday.jpg') center/cover no-repeat; }
-    .fullday-img  { background: url('fullday.jpg') center/cover no-repeat; }
-    .overlay {
-        position: absolute;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.45);
-        transition: background 0.3s ease;
-    }
-    .package-button:hover .overlay {
-        background: rgba(0, 0, 0, 0.25);
-    }
-    .label {
-        position: absolute;
-        top: 45%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 1.9rem;
-        font-weight: 700;
-        text-shadow: 0 0 12px rgba(0,0,0,0.7);
-        pointer-events: none;
-        white-space: nowrap;
-    }
-    .subtext {
-        position: absolute;
-        top: 63%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 1.05rem;
-        opacity: 0.9;
-        pointer-events: none;
-        white-space: nowrap;
-    }
-    @media (max-width: 700px) {
-        .package-button { height: 300px; }
-        .label { font-size: 1.6rem; top: 42%; }
-        .subtext { font-size: 0.95rem; top: 68%; }
-    }
+    body { margin:0; font-family:"Inter",sans-serif; background:#0d0d0d; color:#fff; text-align:center; }
+    .back { position:absolute; left:20px; top:20px; color:#fff; text-decoration:none; font-size:0.95rem; }
+    header { padding:40px 20px 5px; font-size:2.2rem; font-weight:700; }
+    .step { font-size:1rem; color:#ccc; margin-bottom:20px; }
+    .grid { max-width:900px; margin:40px auto; padding:0 20px; display:grid; gap:30px; }
+    .pkg { background:#1a1a1a; padding:30px; border-radius:16px; border:1px solid #333; cursor:pointer; transition:0.25s; }
+    .pkg:hover { background:#222; }
+    .pkg-title { font-size:1.6rem; font-weight:700; margin-bottom:10px; }
+    .pkg-desc { font-size:1rem; color:#ccc; margin-bottom:20px; }
 </style>
 </head>
+
 <body>
 
 <a class="back" href="index.html">← Back</a>
-<header>Select Your Package</header>
+<header>Event Packages</header>
 <div class="step">Step 2 of 6 — Select Package</div>
 
-<div class="package-grid">
-    <a href="calendar.html" class="package-button basic-img" data-package="Basic Package">
-        <div class="overlay"></div>
-        <div class="label">Basic Package</div>
-        <div class="subtext">4 hours • 200+ edited photos</div>
-    </a>
-    <a href="calendar.html" class="package-button halfday-img" data-package="Half‑Day Package">
-        <div class="overlay"></div>
-        <div class="label">Half‑Day Package</div>
-        <div class="subtext">6 hours • 500+ edited photos</div>
-    </a>
-    <a href="calendar.html" class="package-button fullday-img" data-package="Full‑Day Package">
-        <div class="overlay"></div>
-        <div class="label">Full‑Day Package</div>
-        <div class="subtext">12 hours • 800+ edited photos</div>
-    </a>
+<div class="grid">
+    <div class="pkg" data-package="Event 2‑Hour Coverage">
+        <div class="pkg-title">2‑Hour Coverage</div>
+        <div class="pkg-desc">Perfect for small events</div>
+    </div>
+
+    <div class="pkg" data-package="Event Half‑Day">
+        <div class="pkg-title">Half‑Day Coverage</div>
+        <div class="pkg-desc">Up to 5 hours</div>
+    </div>
+
+    <div class="pkg" data-package="Event Full‑Day">
+        <div class="pkg-title">Full‑Day Coverage</div>
+        <div class="pkg-desc">Up to 10 hours</div>
+    </div>
 </div>
 
 <script>
-document.querySelectorAll('.package-button').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const pkg = btn.getAttribute('data-package');
-        localStorage.setItem('package', pkg);
+document.querySelectorAll('.pkg').forEach(pkg => {
+    pkg.addEventListener('click', () => {
+        localStorage.setItem('service', 'Events');
+        localStorage.setItem('package', pkg.getAttribute('data-package'));
+        window.location.href = "calendar.html";
     });
 });
 </script>
