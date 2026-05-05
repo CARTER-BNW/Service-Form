@@ -22,6 +22,7 @@
 
     /* Bigger calendar container */
     .calendar-container {
+        width: 95%;
         max-width: 700px;
         margin: 30px auto;
         background: #1a1a1a;
@@ -29,6 +30,7 @@
         border-radius: 16px;
         border: 1px solid #333;
         animation: fadeIn 0.6s ease;
+        box-sizing: border-box;
     }
 
     @keyframes fadeIn {
@@ -64,17 +66,21 @@
         display: grid;
         grid-template-columns: repeat(7, 1fr);
         gap: 12px;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .day {
-        padding: 18px;
+        aspect-ratio: 1 / 1; /* PERFECT SQUARES */
+        display: flex;
+        justify-content: center;
+        align-items: center;
         background: #0d0d0d;
         border-radius: 10px;
         border: 1px solid #333;
         cursor: pointer;
         transition: 0.25s;
         font-size: 1.2rem;
-        text-align: center;
     }
 
     .day:hover {
@@ -90,6 +96,7 @@
 
     /* Time container */
     .time-container {
+        width: 95%;
         max-width: 700px;
         margin: 40px auto;
         background: #1a1a1a;
@@ -97,6 +104,7 @@
         border-radius: 16px;
         border: 1px solid #333;
         animation: fadeIn 0.6s ease;
+        box-sizing: border-box;
     }
 
     .time-container h2 {
@@ -147,22 +155,20 @@
     @media (max-width: 700px) {
 
         .calendar-container {
-            padding: 25px;
-            max-width: 95%;
+            padding: 20px;
         }
 
         .calendar-grid {
-            gap: 10px;
+            gap: 8px;
         }
 
         .day {
-            padding: 14px;
             font-size: 1rem;
             border-radius: 8px;
         }
 
         .time-container {
-            padding: 25px;
+            padding: 20px;
         }
 
         .time-slot {
