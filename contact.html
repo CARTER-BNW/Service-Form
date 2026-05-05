@@ -16,39 +16,62 @@
 
     header {
         padding: 40px 20px;
-        font-size: 2rem;
+        font-size: 2.2rem;
         font-weight: 700;
     }
 
     .form-box {
-        background: #1a1a1a;
-        padding: 30px;
-        max-width: 500px;
+        width: 95%;
+        max-width: 600px;
         margin: 40px auto;
-        border-radius: 12px;
+        background: #1a1a1a;
+        padding: 35px;
+        border-radius: 16px;
         border: 1px solid #333;
+        animation: fadeIn 0.6s ease;
+        box-sizing: border-box;
     }
 
-    input {
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    input, textarea {
         width: 100%;
-        padding: 12px;
-        margin: 10px 0;
-        border-radius: 8px;
+        padding: 16px;
+        margin: 12px 0;
+        border-radius: 10px;
         border: 1px solid #444;
         background: #0d0d0d;
         color: #fff;
-        font-size: 1rem;
+        font-size: 1.1rem;
+        transition: 0.25s;
+        box-sizing: border-box;
+    }
+
+    input:focus, textarea:focus {
+        border-color: #fff;
+        outline: none;
+        background: #111;
+    }
+
+    textarea {
+        height: 140px;
+        resize: none;
     }
 
     .button {
         display: block;
-        margin-top: 20px;
-        padding: 15px;
+        margin-top: 25px;
+        padding: 18px;
         background: #333;
         color: #fff;
         text-decoration: none;
-        border-radius: 10px;
+        border-radius: 12px;
+        font-size: 1.3rem;
         transition: 0.25s;
+        cursor: pointer;
     }
 
     .button:hover {
@@ -62,13 +85,31 @@
 <header>Contact Details</header>
 
 <div class="form-box">
-    <input type="text" placeholder="First Name">
-    <input type="text" placeholder="Last Name">
-    <input type="email" placeholder="Email">
-    <input type="tel" placeholder="Phone Number">
 
-    <a class="button" href="#">Submit Booking</a>
+    <input id="fname" type="text" placeholder="First Name">
+    <input id="lname" type="text" placeholder="Last Name">
+    <input id="email" type="email" placeholder="Email">
+    <input id="phone" type="tel" placeholder="Phone Number">
+
+    <textarea id="comments" placeholder="Additional Comments"></textarea>
+
+    <div class="button" id="submitBtn">Submit Booking</div>
 </div>
+
+<script>
+document.getElementById("submitBtn").addEventListener("click", function() {
+
+    // Save contact details
+    localStorage.setItem("fname", document.getElementById("fname").value);
+    localStorage.setItem("lname", document.getElementById("lname").value);
+    localStorage.setItem("email", document.getElementById("email").value);
+    localStorage.setItem("phone", document.getElementById("phone").value);
+    localStorage.setItem("comments", document.getElementById("comments").value);
+
+    // Go to review page
+    window.location.href = "booking-review.html";
+});
+</script>
 
 </body>
 </html>
