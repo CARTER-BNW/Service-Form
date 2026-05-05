@@ -20,30 +20,91 @@
         font-weight: 700;
     }
 
-    .form-box {
+    .calendar-container {
+        max-width: 400px;
+        margin: 20px auto;
         background: #1a1a1a;
-        padding: 30px;
-        max-width: 500px;
-        margin: 40px auto;
+        padding: 20px;
         border-radius: 12px;
         border: 1px solid #333;
     }
 
-    input {
-        width: 100%;
+    .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+    }
+
+    .calendar-header button {
+        background: #333;
+        border: none;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .calendar-header button:hover {
+        background: #444;
+    }
+
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 8px;
+    }
+
+    .day {
         padding: 12px;
-        margin: 10px 0;
-        border-radius: 8px;
-        border: 1px solid #444;
         background: #0d0d0d;
-        color: #fff;
-        font-size: 1rem;
+        border-radius: 6px;
+        border: 1px solid #333;
+        cursor: pointer;
+    }
+
+    .day:hover {
+        background: #222;
+    }
+
+    .day.selected {
+        background: #b30000;
+        border-color: #ff4d4d;
+    }
+
+    .time-container {
+        max-width: 400px;
+        margin: 30px auto;
+        background: #1a1a1a;
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid #333;
+    }
+
+    .time-slot {
+        padding: 12px;
+        margin: 8px 0;
+        background: #0d0d0d;
+        border-radius: 6px;
+        border: 1px solid #333;
+        cursor: pointer;
+    }
+
+    .time-slot:hover {
+        background: #222;
+    }
+
+    .time-slot.selected {
+        background: #b30000;
+        border-color: #ff4d4d;
     }
 
     .button {
         display: block;
-        margin-top: 20px;
+        margin: 30px auto;
         padding: 15px;
+        width: 80%;
         background: #333;
         color: #fff;
         text-decoration: none;
@@ -61,15 +122,98 @@
 
 <header>Select Date & Time</header>
 
-<div class="form-box">
-    <label>Date</label>
-    <input type="date">
-
-    <label>Start Time</label>
-    <input type="time">
-
-    <a class="button" href="contact.html">Next: Contact Details</a>
+<div class="calendar-container">
+    <div class="calendar-header">
+        <button onclick="prevMonth()">‹</button>
+        <div id="monthYear"></div>
+        <button onclick="nextMonth()">›</button>
+    </div>
+    <div class="calendar-grid" id="calendarGrid"></div>
 </div>
+
+<div class="time-container">
+    <h2>Select Start Time</h2>
+    <div id="timeSlots"></div>
+</div>
+
+<a class="button" href="contact.html">Next: Contact Details</a>
+
+<script>
+    let currentDate = new Date();
+    let selectedDate = null;
+    let selectedTime = null;
+
+    function renderCalendar() {
+        const monthYear = document.getElementById("monthYear");
+        const grid = document.getElementById("calendarGrid");
+
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+
+        monthYear.textContent = currentDate.toLocaleString("default", { month: "long" }) + " " + year;
+
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        grid.innerHTML = "";
+
+        for (let i = 0; i < firstDay; i++) {
+            grid.innerHTML += `<div></div>`;
+        }
+
+        for (let day = 1; day <= daysInMonth; day++) {
+            const div = document.createElement("div");
+            div.classList.add("day");
+            div.textContent = day;
+
+            div.onclick = () => {
+                document.querySelectorAll(".day").forEach(d => d.classList.remove("selected"));
+                div.classList.add("selected");
+                selectedDate = new Date(year, month, day);
+            };
+
+            grid.appendChild(div);
+        }
+    }
+
+    function prevMonth() {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        renderCalendar();
+    }
+
+    function nextMonth() {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        renderCalendar();
+    }
+
+    function renderTimeSlots() {
+        const container = document.getElementById("timeSlots");
+        container.innerHTML = "";
+
+        const startHour = 8;
+        const endHour = 20;
+
+        for (let hour = startHour; hour <= endHour; hour++) {
+            ["00", "30"].forEach(min => {
+                const time = `${hour.toString().padStart(2, "0")}:${min}`;
+                const div = document.createElement("div");
+                div.classList.add("time-slot");
+                div.textContent = time;
+
+                div.onclick = () => {
+                    document.querySelectorAll(".time-slot").forEach(t => t.classList.remove("selected"));
+                    div.classList.add("selected");
+                    selectedTime = time;
+                };
+
+                container.appendChild(div);
+            });
+        }
+    }
+
+    renderCalendar();
+    renderTimeSlots();
+</script>
 
 </body>
 </html>
