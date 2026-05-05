@@ -6,39 +6,139 @@
 <title>Event Packages</title>
 
 <style>
-    body { margin:0; font-family:"Inter",sans-serif; background:#0d0d0d; color:#fff; text-align:center; }
-    .back { position:absolute; left:20px; top:20px; color:#fff; text-decoration:none; font-size:0.95rem; }
-    header { padding:40px 20px 5px; font-size:2.2rem; font-weight:700; }
-    .step { font-size:1rem; color:#ccc; margin-bottom:20px; }
-    .grid { max-width:900px; margin:40px auto; padding:0 20px; display:grid; gap:30px; }
-    .pkg { background:#1a1a1a; padding:30px; border-radius:16px; border:1px solid #333; cursor:pointer; transition:0.25s; }
-    .pkg:hover { background:#222; }
-    .pkg-title { font-size:1.6rem; font-weight:700; margin-bottom:10px; }
-    .pkg-desc { font-size:1rem; color:#ccc; margin-bottom:20px; }
+    body {
+        margin:0;
+        font-family:"Inter",sans-serif;
+        background:#0d0d0d;
+        color:#fff;
+        text-align:center;
+    }
+
+    .back {
+        position:absolute;
+        left:20px;
+        top:20px;
+        color:#fff;
+        text-decoration:none;
+        font-size:0.95rem;
+    }
+
+    header {
+        padding:40px 20px 5px;
+        font-size:2.2rem;
+        font-weight:700;
+    }
+
+    .step {
+        font-size:1rem;
+        color:#ccc;
+        margin-bottom:20px;
+    }
+
+    .grid {
+        max-width:900px;
+        margin:40px auto;
+        padding:0 20px;
+        display:grid;
+        gap:30px;
+    }
+
+    .pkg {
+        background:#1a1a1a;
+        padding:30px;
+        border-radius:16px;
+        border:1px solid #333;
+        cursor:pointer;
+        transition:0.25s;
+        text-align:left;
+    }
+
+    .pkg:hover {
+        background:#222;
+        border-color:#555;
+    }
+
+    .pkg-title {
+        font-size:1.6rem;
+        font-weight:700;
+        margin-bottom:5px;
+    }
+
+    .pkg-price {
+        font-size:1.3rem;
+        font-weight:600;
+        margin-bottom:15px;
+        color:#e0e0e0;
+    }
+
+    .pkg-desc {
+        font-size:1rem;
+        color:#ccc;
+        line-height:1.6;
+        margin-bottom:10px;
+    }
+
+    ul {
+        margin:0;
+        padding-left:20px;
+        color:#ccc;
+        line-height:1.6;
+    }
+
+    li {
+        margin-bottom:6px;
+    }
 </style>
 </head>
 
 <body>
 
 <a class="back" href="index.html">← Back</a>
+
 <header>Event Packages</header>
 <div class="step">Step 2 of 6 — Select Package</div>
 
 <div class="grid">
-    <div class="pkg" data-package="Event 2‑Hour Coverage">
-        <div class="pkg-title">2‑Hour Coverage</div>
-        <div class="pkg-desc">Perfect for small events</div>
+
+    <!-- EVENT PACK 1 -->
+    <div class="pkg" data-package="Event Pack 1 — $220">
+        <div class="pkg-title">EVENT PACK №1</div>
+        <div class="pkg-price">$220</div>
+        <div class="pkg-desc">A streamlined option for quick coverage with beautiful, natural edits.</div>
+        <ul>
+            <li>1 hour of coverage</li>
+            <li>50+ professionally edited images</li>
+            <li>Natural colour and black & white versions</li>
+            <li>Private online gallery</li>
+        </ul>
     </div>
 
-    <div class="pkg" data-package="Event Half‑Day">
-        <div class="pkg-title">Half‑Day Coverage</div>
-        <div class="pkg-desc">Up to 5 hours</div>
+    <!-- EVENT PACK 2 -->
+    <div class="pkg" data-package="Event Pack 2 — $650">
+        <div class="pkg-title">EVENT PACK №2</div>
+        <div class="pkg-price">$650</div>
+        <div class="pkg-desc">Designed to capture the full atmosphere and emotion of your event.</div>
+        <ul>
+            <li>3 hours of coverage</li>
+            <li>150+ edited images</li>
+            <li>Documentary‑style editing</li>
+            <li>Private online gallery</li>
+        </ul>
     </div>
 
-    <div class="pkg" data-package="Event Full‑Day">
-        <div class="pkg-title">Full‑Day Coverage</div>
-        <div class="pkg-desc">Up to 10 hours</div>
+    <!-- EVENT PACK 3 -->
+    <div class="pkg" data-package="Event Pack 3 — $850">
+        <div class="pkg-title">EVENT PACK №3</div>
+        <div class="pkg-price">$850</div>
+        <div class="pkg-desc">For events that deserve full storytelling from start to finish.</div>
+        <ul>
+            <li>4 hours of coverage</li>
+            <li>220+ edited images</li>
+            <li>Complete event story coverage</li>
+            <li>Private online gallery</li>
+        </ul>
     </div>
+
 </div>
 
 <script>
