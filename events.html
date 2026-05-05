@@ -43,83 +43,103 @@
         gap:30px;
     }
 
+    /* PACKAGE CARD */
     .pkg {
-        background:#1a1a1a;
-        padding:30px;
-        border-radius:16px;
-        border:1px solid #333;
-        cursor:pointer;
-        transition:0.25s;
-        text-align:left;
         position:relative;
+        border-radius:16px;
+        overflow:hidden;
+        cursor:pointer;
+        border:1px solid #333;
+        transition:0.3s ease;
+        text-align:left;
+        height:260px;
+        display:flex;
+        flex-direction:column;
+        justify-content:flex-end;
     }
 
     .pkg:hover {
-        background:#222;
+        transform:scale(1.03);
         border-color:#555;
     }
 
-    /* TITLE + PRICE ROW */
+    /* BACKGROUND IMAGES */
+    .pkg1 { background:url('eventpack1.jpg') center/cover no-repeat; }
+    .pkg2 { background:url('eventpack2.jpg') center/cover no-repeat; }
+    .pkg3 { background:url('eventpack3.jpg') center/cover no-repeat; }
+
+    /* DARK OVERLAY */
+    .overlay {
+        position:absolute;
+        inset:0;
+        background:rgba(0,0,0,0.55);
+        transition:0.3s ease;
+    }
+
+    .pkg:hover .overlay {
+        background:rgba(0,0,0,0.35);
+    }
+
+    /* CONTENT */
+    .pkg-content {
+        position:relative;
+        padding:25px;
+        z-index:2;
+    }
+
     .pkg-header {
         display:flex;
         justify-content:space-between;
         align-items:center;
-        margin-bottom:15px;
+        margin-bottom:10px;
     }
 
     .pkg-title {
-        font-size:1.6rem;
+        font-size:1.5rem;
         font-weight:700;
     }
 
     .pkg-price {
-        font-size:1.4rem;
+        font-size:1.3rem;
         font-weight:700;
-        color:#e0e0e0;
+        color:#f2f2f2;
     }
 
     .pkg-desc {
         font-size:1rem;
-        color:#ccc;
-        line-height:1.6;
-        margin-bottom:15px;
+        color:#ddd;
+        margin-bottom:10px;
+        line-height:1.5;
     }
 
     ul {
         margin:0;
         padding-left:20px;
         color:#ccc;
-        line-height:1.6;
+        line-height:1.5;
+        font-size:0.95rem;
     }
 
-    li {
-        margin-bottom:6px;
-    }
+    li { margin-bottom:4px; }
 
     /* MOST POPULAR BADGE */
     .badge {
         position:absolute;
-        top:-12px;
-        right:-12px;
+        top:12px;
+        right:12px;
         background:#ffcc00;
         color:#000;
         font-size:0.75rem;
         font-weight:700;
         padding:6px 10px;
         border-radius:8px;
+        z-index:3;
         box-shadow:0 0 10px rgba(255,255,0,0.4);
     }
 
     @media (max-width:700px) {
-        .pkg-header {
-            flex-direction:column;
-            align-items:flex-start;
-            gap:5px;
-        }
-        .badge {
-            top:-10px;
-            right:-10px;
-        }
+        .pkg { height:auto; }
+        .pkg-content { padding:20px; }
     }
 </style>
 </head>
@@ -134,53 +154,63 @@
 <div class="grid">
 
     <!-- EVENT PACK 1 -->
-    <div class="pkg" data-package="Event Pack 1 — $220">
-        <div class="pkg-header">
-            <div class="pkg-title">EVENT PACK №1</div>
-            <div class="pkg-price">$220</div>
-        </div>
+    <div class="pkg pkg1" data-package="Event Pack 1 — $220">
+        <div class="overlay"></div>
+        <div class="pkg-content">
+            <div class="pkg-header">
+                <div class="pkg-title">EVENT PACK №1</div>
+                <div class="pkg-price">$220</div>
+            </div>
 
-        <div class="pkg-desc">A streamlined option for quick coverage with beautiful, natural edits.</div>
-        <ul>
-            <li>1 hour of coverage</li>
-            <li>50+ professionally edited images</li>
-            <li>Natural colour and black & white versions</li>
-            <li>Private online gallery</li>
-        </ul>
+            <div class="pkg-desc">A streamlined option for quick coverage with beautiful, natural edits.</div>
+            <ul>
+                <li>1 hour of coverage</li>
+                <li>50+ professionally edited images</li>
+                <li>Natural colour and black & white versions</li>
+                <li>Private online gallery</li>
+            </ul>
+        </div>
     </div>
 
     <!-- EVENT PACK 2 (MOST POPULAR) -->
-    <div class="pkg" data-package="Event Pack 2 — $650">
+    <div class="pkg pkg2" data-package="Event Pack 2 — $650">
         <div class="badge">MOST POPULAR</div>
+        <div class="overlay"></div>
 
-        <div class="pkg-header">
-            <div class="pkg-title">EVENT PACK №2</div>
-            <div class="pkg-price">$650</div>
+        <div class="pkg-content">
+            <div class="pkg-header">
+                <div class="pkg-title">EVENT PACK №2</div>
+                <div class="pkg-price">$650</div>
+            </div>
+
+            <div class="pkg-desc">Designed to capture the full atmosphere and emotion of your event.</div>
+            <ul>
+                <li>3 hours of coverage</li>
+                <li>150+ edited images</li>
+                <li>Documentary‑style editing</li>
+                <li>Private online gallery</li>
+            </ul>
         </div>
-
-        <div class="pkg-desc">Designed to capture the full atmosphere and emotion of your event.</div>
-        <ul>
-            <li>3 hours of coverage</li>
-            <li>150+ edited images</li>
-            <li>Documentary‑style editing</li>
-            <li>Private online gallery</li>
-        </ul>
     </div>
 
     <!-- EVENT PACK 3 -->
-    <div class="pkg" data-package="Event Pack 3 — $850">
-        <div class="pkg-header">
-            <div class="pkg-title">EVENT PACK №3</div>
-            <div class="pkg-price">$850</div>
-        </div>
+    <div class="pkg pkg3" data-package="Event Pack 3 — $850">
+        <div class="overlay"></div>
 
-        <div class="pkg-desc">For events that deserve full storytelling from start to finish.</div>
-        <ul>
-            <li>4 hours of coverage</li>
-            <li>220+ edited images</li>
-            <li>Complete event story coverage</li>
-            <li>Private online gallery</li>
-        </ul>
+        <div class="pkg-content">
+            <div class="pkg-header">
+                <div class="pkg-title">EVENT PACK №3</div>
+                <div class="pkg-price">$850</div>
+            </div>
+
+            <div class="pkg-desc">For events that deserve full storytelling from start to finish.</div>
+            <ul>
+                <li>4 hours of coverage</li>
+                <li>220+ edited images</li>
+                <li>Complete event story coverage</li>
+                <li>Private online gallery</li>
+            </ul>
+        </div>
     </div>
 
 </div>
