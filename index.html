@@ -33,6 +33,18 @@
         margin-bottom: 30px;
     }
 
+    /* FADE-IN ANIMATION */
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* SERVICE GRID */
     .grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -103,7 +115,7 @@
 
     .carousel-item {
         width: calc(33.333% - 20px);
-        aspect-ratio: 3 / 4; /* Portrait-friendly ratio */
+        aspect-ratio: 3 / 4;
         border-radius: 14px;
         background-size: cover;
         background-position: center;
@@ -111,6 +123,10 @@
         border: 1px solid #333;
     }
 
+    /* Lazy-loading placeholder */
+    .lazy-bg {
+        background-color: #111;
+    }
 
     /* FULLSCREEN MODAL */
     .modal {
@@ -254,12 +270,13 @@
 <body>
 
 <!-- LOGO -->
-<img src="logo.png" alt="Logo" class="logo">
+<img src="logo.png" alt="Logo" class="logo fade-in">
 
-<header>Available Services</header>
-<div class="step">Step 1 of 6 — Select Service</div>
+<header class="fade-in">Available Services</header>
+<div class="step fade-in">Step 1 of 6 — Select Service</div>
 
-<div class="grid">
+<!-- SERVICE GRID -->
+<div class="grid fade-in">
 
     <a href="wedding.html" class="service-button wedding-img" data-service="Wedding">
         <div class="overlay"></div>
@@ -284,7 +301,7 @@
 </div>
 
 <!-- CAROUSEL SECTION -->
-<div class="carousel-wrapper">
+<div class="carousel-wrapper fade-in">
     <div id="carousel" class="carousel"></div>
 </div>
 
@@ -297,7 +314,7 @@
 </div>
 
 <!-- LINKS SECTION -->
-<div class="links-section">
+<div class="links-section fade-in">
     <h2 class="links-title">Links</h2>
 
     <div class="links-grid">
@@ -319,7 +336,7 @@
 </div>
 
 <!-- ABOUT ME SECTION -->
-<div class="about-section">
+<div class="about-section fade-in">
     <div class="about-container">
 
         <img src="portraitme.png" class="about-photo" alt="Portrait">
@@ -349,8 +366,11 @@
     </div>
 </div>
 
+<!-- FULL SCRIPT -->
 <script>
-/* SAVE SERVICE SELECTION */
+/* -----------------------------------------------------------
+   SAVE SERVICE SELECTION
+----------------------------------------------------------- */
 document.querySelectorAll('.service-button').forEach(btn => {
     btn.addEventListener('click', () => {
         const service = btn.getAttribute('data-service');
@@ -358,7 +378,24 @@ document.querySelectorAll('.service-button').forEach(btn => {
     });
 });
 
-/* CAROUSEL LOGIC */
+
+/* -----------------------------------------------------------
+   FADE-IN ON SCROLL
+----------------------------------------------------------- */
+const fadeObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+        }
+    });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+
+/* -----------------------------------------------------------
+   CAROUSEL (3 images at a time, flick every 3 seconds)
+----------------------------------------------------------- */
 const images = [
     "car1.jpg","car2.jpg","car3.jpg","car4.jpg","car5.jpg","car6.jpg",
     "car7.jpg","car8.jpg","car9.jpg","car10.jpg","car11.jpg","car12.jpg",
@@ -370,13 +407,17 @@ let index = 0;
 
 function renderCarousel() {
     carousel.innerHTML = "";
+
     for (let i = 0; i < 3; i++) {
         const imgIndex = (index + i) % images.length;
+
         const div = document.createElement("div");
-        div.className = "carousel-item";
-        div.style.backgroundImage = `url('${images[imgIndex]}')`;
+        div.className = "carousel-item lazy-bg";
+        div.dataset.src = images[imgIndex];
         div.onclick = () => openModal(imgIndex);
+
         carousel.appendChild(div);
+        lazyObserver.observe(div);
     }
 }
 
@@ -387,7 +428,30 @@ setInterval(() => {
     renderCarousel();
 }, 3000);
 
-/* MODAL LOGIC */
+
+/* -----------------------------------------------------------
+   LAZY-LOADING FOR BACKGROUND IMAGES
+----------------------------------------------------------- */
+const lazyObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const el = entry.target;
+            const src = el.dataset.src;
+
+            if (src) {
+                el.style.backgroundImage = `url('${src}')`;
+                el.removeAttribute("data-src");
+            }
+
+            lazyObserver.unobserve(el);
+        }
+    });
+}, { rootMargin: "200px" });
+
+
+/* -----------------------------------------------------------
+   FULLSCREEN MODAL
+----------------------------------------------------------- */
 let modalIndex = 0;
 
 function openModal(i) {
