@@ -13,13 +13,24 @@
         color: #f2f2f2;
         text-align: center;
     }
-
+    .back {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        color: #f2f2f2;
+        text-decoration: none;
+        font-size: 0.95rem;
+    }
     header {
-        padding: 40px 20px;
+        padding: 40px 20px 5px;
         font-size: 2.2rem;
         font-weight: 700;
     }
-
+    .step {
+        font-size: 1rem;
+        color: #ccc;
+        margin-bottom: 20px;
+    }
     .form-box {
         width: 95%;
         max-width: 600px;
@@ -31,12 +42,10 @@
         animation: fadeIn 0.6s ease;
         box-sizing: border-box;
     }
-
     @keyframes fadeIn {
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
     }
-
     input, textarea {
         width: 100%;
         padding: 16px;
@@ -49,18 +58,15 @@
         transition: 0.25s;
         box-sizing: border-box;
     }
-
     input:focus, textarea:focus {
         border-color: #fff;
         outline: none;
         background: #111;
     }
-
     textarea {
         height: 140px;
         resize: none;
     }
-
     .button {
         display: block;
         margin-top: 25px;
@@ -73,40 +79,34 @@
         transition: 0.25s;
         cursor: pointer;
     }
-
-    .button:hover {
-        background: #444;
+    .button:hover { background: #444; }
+    @media (max-width: 700px) {
+        input, textarea { font-size: 1rem; padding: 14px; }
     }
 </style>
 </head>
-
 <body>
 
+<a class="back" href="calendar.html">← Back</a>
 <header>Contact Details</header>
+<div class="step">Step 4 of 6 — Your Details</div>
 
 <div class="form-box">
-
     <input id="fname" type="text" placeholder="First Name">
     <input id="lname" type="text" placeholder="Last Name">
     <input id="email" type="email" placeholder="Email">
     <input id="phone" type="tel" placeholder="Phone Number">
-
     <textarea id="comments" placeholder="Additional Comments"></textarea>
-
-    <div class="button" id="submitBtn">Submit Booking</div>
+    <div class="button" id="submitBtn">Next: Review Booking</div>
 </div>
 
 <script>
 document.getElementById("submitBtn").addEventListener("click", function() {
-
-    // Save contact details
     localStorage.setItem("fname", document.getElementById("fname").value);
     localStorage.setItem("lname", document.getElementById("lname").value);
     localStorage.setItem("email", document.getElementById("email").value);
     localStorage.setItem("phone", document.getElementById("phone").value);
     localStorage.setItem("comments", document.getElementById("comments").value);
-
-    // Go to review page
     window.location.href = "booking-review.html";
 });
 </script>
