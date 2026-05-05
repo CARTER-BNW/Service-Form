@@ -51,6 +51,7 @@
         cursor:pointer;
         transition:0.25s;
         text-align:left;
+        position:relative;
     }
 
     .pkg:hover {
@@ -58,16 +59,22 @@
         border-color:#555;
     }
 
+    /* TITLE + PRICE ROW */
+    .pkg-header {
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:15px;
+    }
+
     .pkg-title {
         font-size:1.6rem;
         font-weight:700;
-        margin-bottom:5px;
     }
 
     .pkg-price {
-        font-size:1.3rem;
-        font-weight:600;
-        margin-bottom:15px;
+        font-size:1.4rem;
+        font-weight:700;
         color:#e0e0e0;
     }
 
@@ -75,7 +82,7 @@
         font-size:1rem;
         color:#ccc;
         line-height:1.6;
-        margin-bottom:10px;
+        margin-bottom:15px;
     }
 
     ul {
@@ -87,6 +94,32 @@
 
     li {
         margin-bottom:6px;
+    }
+
+    /* MOST POPULAR BADGE */
+    .badge {
+        position:absolute;
+        top:-12px;
+        right:-12px;
+        background:#ffcc00;
+        color:#000;
+        font-size:0.75rem;
+        font-weight:700;
+        padding:6px 10px;
+        border-radius:8px;
+        box-shadow:0 0 10px rgba(255,255,0,0.4);
+    }
+
+    @media (max-width:700px) {
+        .pkg-header {
+            flex-direction:column;
+            align-items:flex-start;
+            gap:5px;
+        }
+        .badge {
+            top:-10px;
+            right:-10px;
+        }
     }
 </style>
 </head>
@@ -102,8 +135,11 @@
 
     <!-- EVENT PACK 1 -->
     <div class="pkg" data-package="Event Pack 1 — $220">
-        <div class="pkg-title">EVENT PACK №1</div>
-        <div class="pkg-price">$220</div>
+        <div class="pkg-header">
+            <div class="pkg-title">EVENT PACK №1</div>
+            <div class="pkg-price">$220</div>
+        </div>
+
         <div class="pkg-desc">A streamlined option for quick coverage with beautiful, natural edits.</div>
         <ul>
             <li>1 hour of coverage</li>
@@ -113,10 +149,15 @@
         </ul>
     </div>
 
-    <!-- EVENT PACK 2 -->
+    <!-- EVENT PACK 2 (MOST POPULAR) -->
     <div class="pkg" data-package="Event Pack 2 — $650">
-        <div class="pkg-title">EVENT PACK №2</div>
-        <div class="pkg-price">$650</div>
+        <div class="badge">MOST POPULAR</div>
+
+        <div class="pkg-header">
+            <div class="pkg-title">EVENT PACK №2</div>
+            <div class="pkg-price">$650</div>
+        </div>
+
         <div class="pkg-desc">Designed to capture the full atmosphere and emotion of your event.</div>
         <ul>
             <li>3 hours of coverage</li>
@@ -128,8 +169,11 @@
 
     <!-- EVENT PACK 3 -->
     <div class="pkg" data-package="Event Pack 3 — $850">
-        <div class="pkg-title">EVENT PACK №3</div>
-        <div class="pkg-price">$850</div>
+        <div class="pkg-header">
+            <div class="pkg-title">EVENT PACK №3</div>
+            <div class="pkg-price">$850</div>
+        </div>
+
         <div class="pkg-desc">For events that deserve full storytelling from start to finish.</div>
         <ul>
             <li>4 hours of coverage</li>
