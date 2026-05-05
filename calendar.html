@@ -16,34 +16,43 @@
 
     header {
         padding: 40px 20px;
-        font-size: 2rem;
+        font-size: 2.2rem;
         font-weight: 700;
     }
 
+    /* Bigger calendar container */
     .calendar-container {
-        max-width: 400px;
-        margin: 20px auto;
+        max-width: 700px;
+        margin: 30px auto;
         background: #1a1a1a;
-        padding: 20px;
-        border-radius: 12px;
+        padding: 30px;
+        border-radius: 16px;
         border: 1px solid #333;
+        animation: fadeIn 0.6s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
     .calendar-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 15px;
-        font-size: 1.2rem;
+        margin-bottom: 20px;
+        font-size: 1.4rem;
+        font-weight: 600;
     }
 
     .calendar-header button {
         background: #333;
         border: none;
         color: white;
-        padding: 8px 12px;
-        border-radius: 6px;
+        padding: 10px 16px;
+        border-radius: 8px;
         cursor: pointer;
+        transition: 0.25s;
     }
 
     .calendar-header button:hover {
@@ -53,15 +62,17 @@
     .calendar-grid {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
-        gap: 8px;
+        gap: 10px;
     }
 
     .day {
-        padding: 12px;
+        padding: 16px;
         background: #0d0d0d;
-        border-radius: 6px;
+        border-radius: 8px;
         border: 1px solid #333;
         cursor: pointer;
+        transition: 0.25s;
+        font-size: 1.1rem;
     }
 
     .day:hover {
@@ -69,26 +80,37 @@
     }
 
     .day.selected {
-        background: #b30000;
-        border-color: #ff4d4d;
+        background: #ffffff;
+        color: #000;
+        border-color: #fff;
+        font-weight: 700;
     }
 
+    /* Time container */
     .time-container {
-        max-width: 400px;
-        margin: 30px auto;
+        max-width: 700px;
+        margin: 40px auto;
         background: #1a1a1a;
-        padding: 20px;
-        border-radius: 12px;
+        padding: 30px;
+        border-radius: 16px;
         border: 1px solid #333;
+        animation: fadeIn 0.6s ease;
+    }
+
+    .time-container h2 {
+        margin-bottom: 20px;
+        font-size: 1.6rem;
     }
 
     .time-slot {
-        padding: 12px;
+        padding: 14px;
         margin: 8px 0;
         background: #0d0d0d;
-        border-radius: 6px;
+        border-radius: 8px;
         border: 1px solid #333;
         cursor: pointer;
+        transition: 0.25s;
+        font-size: 1.1rem;
     }
 
     .time-slot:hover {
@@ -96,24 +118,45 @@
     }
 
     .time-slot.selected {
-        background: #b30000;
-        border-color: #ff4d4d;
+        background: #ffffff;
+        color: #000;
+        border-color: #fff;
+        font-weight: 700;
     }
 
     .button {
         display: block;
-        margin: 30px auto;
-        padding: 15px;
+        margin: 40px auto;
+        padding: 18px;
         width: 80%;
         background: #333;
         color: #fff;
         text-decoration: none;
-        border-radius: 10px;
+        border-radius: 12px;
+        font-size: 1.3rem;
         transition: 0.25s;
     }
 
     .button:hover {
         background: #444;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 700px) {
+        .calendar-container,
+        .time-container {
+            padding: 20px;
+        }
+
+        .day {
+            padding: 12px;
+            font-size: 1rem;
+        }
+
+        .time-slot {
+            padding: 12px;
+            font-size: 1rem;
+        }
     }
 </style>
 </head>
@@ -190,10 +233,7 @@
         const container = document.getElementById("timeSlots");
         container.innerHTML = "";
 
-        const startHour = 8;
-        const endHour = 20;
-
-        for (let hour = startHour; hour <= endHour; hour++) {
+        for (let hour = 0; hour < 24; hour++) {
             ["00", "30"].forEach(min => {
                 const time = `${hour.toString().padStart(2, "0")}:${min}`;
                 const div = document.createElement("div");
