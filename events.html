@@ -67,6 +67,7 @@
     .pkg1 { background:url('eventpack1.jpg') center 42% /cover no-repeat; }
     .pkg2 { background:url('eventpack2.jpg') center 32% /cover no-repeat; }
     .pkg3 { background:url('eventpack3.jpg') center 60% /cover no-repeat; }
+    .pkg4 { background:url('eventpack4.jpg') center/cover no-repeat; }
 
     /* DARK OVERLAY */
     .overlay {
@@ -137,9 +138,44 @@
         box-shadow:0 0 10px rgba(255,255,0,0.4);
     }
 
+    /* PHOTO GROUPS */
+    .group-title {
+        font-size:1.6rem;
+        font-weight:700;
+        margin:60px auto 20px;
+        text-align:left;
+        max-width:900px;
+        padding:0 20px;
+    }
+
+    .photo-grid {
+        max-width:900px;
+        margin:0 auto 40px;
+        padding:0 20px;
+        display:grid;
+        grid-template-columns:repeat(4, 1fr);
+        gap:20px;
+    }
+
+    .photo-grid img {
+        width:100%;
+        height:200px;
+        object-fit:cover;
+        border-radius:12px;
+        border:1px solid #333;
+    }
+
     @media (max-width:700px) {
         .pkg { height:auto; }
         .pkg-content { padding:20px; }
+
+        .photo-grid {
+            grid-template-columns:repeat(2, 1fr);
+        }
+
+        .photo-grid img {
+            height:160px;
+        }
     }
 </style>
 </head>
@@ -213,6 +249,53 @@
         </div>
     </div>
 
+    <!-- EVENT PACK 4 — CUSTOM QUOTE -->
+    <div class="pkg pkg4" data-package="Custom Event Quote">
+        <div class="overlay"></div>
+
+        <div class="pkg-content">
+            <div class="pkg-header">
+                <div class="pkg-title">CUSTOM EVENT QUOTE</div>
+                <div class="pkg-price">Custom</div>
+            </div>
+
+            <div class="pkg-desc">Perfect for multi‑day events, corporate functions, or unique coverage needs.</div>
+            <ul>
+                <li>Flexible hours</li>
+                <li>Tailored coverage plan</li>
+                <li>Unlimited edited images</li>
+                <li>Private online gallery</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<!-- PHOTO GROUP 1 -->
+<div class="group-title">Corporate Events</div>
+<div class="photo-grid">
+    <img src="eventgroup1-1.jpg">
+    <img src="eventgroup1-2.jpg">
+    <img src="eventgroup1-3.jpg">
+    <img src="eventgroup1-4.jpg">
+</div>
+
+<!-- PHOTO GROUP 2 -->
+<div class="group-title">Private Functions</div>
+<div class="photo-grid">
+    <img src="eventgroup2-1.jpg">
+    <img src="eventgroup2-2.jpg">
+    <img src="eventgroup2-3.jpg">
+    <img src="eventgroup2-4.jpg">
+</div>
+
+<!-- PHOTO GROUP 3 -->
+<div class="group-title">Live Performances</div>
+<div class="photo-grid">
+    <img src="eventgroup3-1.jpg">
+    <img src="eventgroup3-2.jpg">
+    <img src="eventgroup3-3.jpg">
+    <img src="eventgroup3-4.jpg">
 </div>
 
 <script>
