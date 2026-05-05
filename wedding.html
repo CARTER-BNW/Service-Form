@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Select Package</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background: #0d0d0d;
+        color: #f2f2f2;
+        text-align: center;
+    }
+
+    header {
+        padding: 40px 20px;
+        font-size: 2rem;
+        font-weight: 700;
+    }
+
+    .package {
+        background: #1a1a1a;
+        margin: 20px auto;
+        padding: 25px;
+        max-width: 600px;
+        border-radius: 12px;
+        border: 1px solid #333;
+        transition: 0.25s;
+        cursor: pointer;
+    }
+
+    .package:hover {
+        background: #222;
+        border-color: #666;
+        transform: translateY(-3px);
+    }
+
+    .package h2 {
+        margin: 0 0 10px;
+    }
+</style>
+</head>
+
+<body>
+
+<header>Select Your Package</header>
+
+<a class="package" href="calendar.html?package=basic">
+    <h2>Basic Package</h2>
+    <p>4 hours • 200+ edited photos</p>
+</a>
+
+<a class="package" href="calendar.html?package=halfday">
+    <h2>Half‑Day Package</h2>
+    <p>6 hours • 500+ edited photos</p>
+</a>
+
+<a class="package" href="calendar.html?package=fullday">
+    <h2>Full‑Day Package</h2>
+    <p>12 hours • 800+ edited photos</p>
+</a>
+
+</body>
+</html>
