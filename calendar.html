@@ -59,20 +59,22 @@
         background: #444;
     }
 
+    /* Calendar grid */
     .calendar-grid {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
-        gap: 10px;
+        gap: 12px;
     }
 
     .day {
-        padding: 16px;
+        padding: 18px;
         background: #0d0d0d;
-        border-radius: 8px;
+        border-radius: 10px;
         border: 1px solid #333;
         cursor: pointer;
         transition: 0.25s;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
+        text-align: center;
     }
 
     .day:hover {
@@ -141,16 +143,26 @@
         background: #444;
     }
 
-    /* Mobile adjustments */
+    /* MOBILE FIXES */
     @media (max-width: 700px) {
-        .calendar-container,
-        .time-container {
-            padding: 20px;
+
+        .calendar-container {
+            padding: 25px;
+            max-width: 95%;
+        }
+
+        .calendar-grid {
+            gap: 10px;
         }
 
         .day {
-            padding: 12px;
+            padding: 14px;
             font-size: 1rem;
+            border-radius: 8px;
+        }
+
+        .time-container {
+            padding: 25px;
         }
 
         .time-slot {
