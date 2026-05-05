@@ -12,12 +12,6 @@
         background: #0d0d0d;
         color: #f2f2f2;
         text-align: center;
-        animation: fadeIn 0.8s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
     }
 
     header {
@@ -26,81 +20,71 @@
         font-weight: 700;
     }
 
-    /* 2×2 grid, wider cards */
+    /* 2×2 grid */
     .grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 30px;
-        max-width: 900px;
+        max-width: 1000px;
         margin: 40px auto;
         padding: 0 20px;
     }
 
-    .service-card {
-        background: #1a1a1a;
-        padding: 25px;
-        border-radius: 12px;
-        border: 1px solid #333;
-        transition: 0.3s ease;
-        animation: cardFade 0.8s ease forwards;
-        opacity: 0;
+    /* Image button container */
+    .service-button {
+        position: relative;
+        height: 260px;
+        border-radius: 14px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    /* Staggered fade-in */
-    .service-card:nth-child(1) { animation-delay: 0.1s; }
-    .service-card:nth-child(2) { animation-delay: 0.2s; }
-    .service-card:nth-child(3) { animation-delay: 0.3s; }
-    .service-card:nth-child(4) { animation-delay: 0.4s; }
-
-    @keyframes cardFade {
-        from { opacity: 0; transform: translateY(15px); }
-        to { opacity: 1; transform: translateY(0); }
+    /* Hover animation */
+    .service-button:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
     }
 
-    .service-card:hover {
-        background: #222;
-        border-color: #666;
-        transform: translateY(-6px) scale(1.02);
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.08);
+    /* Background images */
+    .wedding-img  { background: url('wedding.jpg') center/cover no-repeat; }
+    .model-img    { background: url('model.jpg') center/cover no-repeat; }
+    .headshot-img { background: url('headshot.jpg') center/cover no-repeat; }
+    .event-img    { background: url('event.jpg') center/cover no-repeat; }
+
+    /* Dark overlay for readability */
+    .overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        transition: background 0.3s ease;
     }
 
-    .hero-image {
-        width: 100%;
-        height: 220px;
-        border-radius: 10px;
-        border: 1px solid #333;
-        margin-bottom: 20px;
-        background-size: cover;
-        background-position: center;
+    .service-button:hover .overlay {
+        background: rgba(0, 0, 0, 0.25);
     }
 
-    /* Unique images */
-    .wedding-img { background-image: url('wedding.jpg'); }
-    .model-img   { background-image: url('model.jpg'); }
-    .headshot-img { background-image: url('headshot.jpg'); }
-    .event-img   { background-image: url('event.jpg'); }
-
-    .button {
-        display: inline-block;
-        padding: 15px 25px;
-        background: #333;
-        color: #fff;
-        text-decoration: none;
-        font-size: 1.2rem;
-        border-radius: 10px;
-        border: 1px solid #444;
-        transition: 0.25s;
+    /* Text on image */
+    .label {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 1.8rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-shadow: 0 0 10px rgba(0,0,0,0.7);
+        pointer-events: none;
     }
 
-    .button:hover {
-        background: #444;
-        border-color: #666;
-    }
-
-    /* Mobile: stack into 1 column */
+    /* Make 1 column on mobile */
     @media (max-width: 700px) {
         .grid {
             grid-template-columns: 1fr;
+        }
+        .service-button {
+            height: 220px;
         }
     }
 </style>
@@ -112,25 +96,25 @@
 
 <div class="grid">
 
-    <div class="service-card">
-        <div class="hero-image wedding-img"></div>
-        <a class="button" href="wedding.html">Wedding</a>
-    </div>
+    <a href="wedding.html" class="service-button wedding-img">
+        <div class="overlay"></div>
+        <div class="label">Wedding</div>
+    </a>
 
-    <div class="service-card">
-        <div class="hero-image model-img"></div>
-        <a class="button" href="model.html">Model Shoot</a>
-    </div>
+    <a href="model.html" class="service-button model-img">
+        <div class="overlay"></div>
+        <div class="label">Model Shoot</div>
+    </a>
 
-    <div class="service-card">
-        <div class="hero-image headshot-img"></div>
-        <a class="button" href="headshots.html">Headshots</a>
-    </div>
+    <a href="headshots.html" class="service-button headshot-img">
+        <div class="overlay"></div>
+        <div class="label">Headshots</div>
+    </a>
 
-    <div class="service-card">
-        <div class="hero-image event-img"></div>
-        <a class="button" href="events.html">Events</a>
-    </div>
+    <a href="events.html" class="service-button event-img">
+        <div class="overlay"></div>
+        <div class="label">Events</div>
+    </a>
 
 </div>
 
