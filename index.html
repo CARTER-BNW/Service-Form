@@ -89,32 +89,65 @@
 
     /* CAROUSEL SECTION */
     .carousel-wrapper {
+        max-width: 1200px;
         margin: 80px auto 40px;
         overflow: hidden;
-        max-width: 1200px;
         padding: 0 20px;
     }
 
-    .carousel-track {
+    .carousel {
         display: flex;
         gap: 20px;
-        animation: scroll 18s linear infinite;
+        transition: transform 0.4s ease;
     }
 
     .carousel-item {
-        min-width: calc(33.333% - 20px);
-        height: 220px;
+        width: calc(33.333% - 20px);
+        height: 240px;
         border-radius: 14px;
-        overflow: hidden;
         background-size: cover;
         background-position: center;
+        cursor: pointer;
         border: 1px solid #333;
     }
 
-    @keyframes scroll {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
+    /* FULLSCREEN MODAL */
+    .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.92);
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
     }
+
+    .modal-img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 10px;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 25px;
+        right: 35px;
+        font-size: 2rem;
+        cursor: pointer;
+        color: white;
+    }
+
+    .arrow {
+        position: absolute;
+        top: 50%;
+        font-size: 3rem;
+        cursor: pointer;
+        color: white;
+        user-select: none;
+    }
+
+    .arrow.left { left: 40px; }
+    .arrow.right { right: 40px; }
 
     /* LINKS SECTION */
     .links-section {
@@ -173,7 +206,6 @@
         padding: 40px;
         border-radius: 16px;
         border: 1px solid #333;
-        animation: fadeIn 0.6s ease;
     }
 
     .about-photo {
@@ -196,12 +228,12 @@
         text-align: left;
     }
 
-    /* Mobile */
+    /* MOBILE */
     @media (max-width: 700px) {
         .grid { grid-template-columns: 1fr; }
         .service-button { height: 260px; }
 
-        .carousel-item { min-width: 80%; }
+        .carousel-item { width: 80%; }
 
         .links-grid { grid-template-columns: 1fr; }
 
@@ -252,21 +284,15 @@
 
 <!-- CAROUSEL SECTION -->
 <div class="carousel-wrapper">
-    <div class="carousel-track">
+    <div id="carousel" class="carousel"></div>
+</div>
 
-        <div class="carousel-item" style="background-image:url('car1.jpg');"></div>
-        <div class="carousel-item" style="background-image:url('car2.jpg');"></div>
-        <div class="carousel-item" style="background-image:url('car3.jpg');"></div>
-        <div class="carousel-item" style="background-image:url('car4.jpg');"></div>
-        <div class="carousel-item" style="background-image:url('car5.jpg');"></div>
-        <div class="carousel-item" style="background-image:url('car6.jpg');"></div>
-
-        <!-- Duplicate for seamless loop -->
-        <div class="carousel-item" style="background-image:url('car1.jpg');"></div>
-        <div class="carousel-item" style="background-image:url('car2.jpg');"></div>
-        <div class="carousel-item" style="background-image:url('car3.jpg');"></div>
-
-    </div>
+<!-- FULLSCREEN MODAL -->
+<div id="modal" class="modal">
+    <span class="close-btn" onclick="closeModal()">✕</span>
+    <span class="arrow left" onclick="prevModal()">❮</span>
+    <img id="modalImg" class="modal-img">
+    <span class="arrow right" onclick="nextModal()">❯</span>
 </div>
 
 <!-- LINKS SECTION -->
@@ -323,12 +349,65 @@
 </div>
 
 <script>
+/* SAVE SERVICE SELECTION */
 document.querySelectorAll('.service-button').forEach(btn => {
     btn.addEventListener('click', () => {
         const service = btn.getAttribute('data-service');
         localStorage.setItem('service', service);
     });
 });
+
+/* CAROUSEL LOGIC */
+const images = [
+    "car1.jpg","car2.jpg","car3.jpg","car4.jpg","car5.jpg","car6.jpg",
+    "car7.jpg","car8.jpg","car9.jpg","car10.jpg","car11.jpg","car12.jpg",
+    "car13.jpg","car14.jpg","car15.jpg","car16.jpg","car17.jpg","car18.jpg"
+];
+
+const carousel = document.getElementById("carousel");
+let index = 0;
+
+function renderCarousel() {
+    carousel.innerHTML = "";
+    for (let i = 0; i < 3; i++) {
+        const imgIndex = (index + i) % images.length;
+        const div = document.createElement("div");
+        div.className = "carousel-item";
+        div.style.backgroundImage = `url('${images[imgIndex]}')`;
+        div.onclick = () => openModal(imgIndex);
+        carousel.appendChild(div);
+    }
+}
+
+renderCarousel();
+
+setInterval(() => {
+    index = (index + 3) % images.length;
+    renderCarousel();
+}, 3000);
+
+/* MODAL LOGIC */
+let modalIndex = 0;
+
+function openModal(i) {
+    modalIndex = i;
+    document.getElementById("modalImg").src = images[i];
+    document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+function nextModal() {
+    modalIndex = (modalIndex + 1) % images.length;
+    document.getElementById("modalImg").src = images[modalIndex];
+}
+
+function prevModal() {
+    modalIndex = (modalIndex - 1 + images.length) % images.length;
+    document.getElementById("modalImg").src = images[modalIndex];
+}
 </script>
 
 </body>
