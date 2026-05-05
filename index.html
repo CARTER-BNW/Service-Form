@@ -87,6 +87,35 @@
         pointer-events: none;
     }
 
+    /* CAROUSEL SECTION */
+    .carousel-wrapper {
+        margin: 80px auto 40px;
+        overflow: hidden;
+        max-width: 1200px;
+        padding: 0 20px;
+    }
+
+    .carousel-track {
+        display: flex;
+        gap: 20px;
+        animation: scroll 18s linear infinite;
+    }
+
+    .carousel-item {
+        min-width: calc(33.333% - 20px);
+        height: 220px;
+        border-radius: 14px;
+        overflow: hidden;
+        background-size: cover;
+        background-position: center;
+        border: 1px solid #333;
+    }
+
+    @keyframes scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+
     /* LINKS SECTION */
     .links-section {
         margin-top: 80px;
@@ -172,6 +201,8 @@
         .grid { grid-template-columns: 1fr; }
         .service-button { height: 260px; }
 
+        .carousel-item { min-width: 80%; }
+
         .links-grid { grid-template-columns: 1fr; }
 
         .about-container {
@@ -189,7 +220,7 @@
 
 <body>
 
-<!--  -->
+<!-- LOGO -->
 <img src="logo.png" alt="Logo" class="logo">
 
 <header>Available Services</header>
@@ -219,6 +250,25 @@
 
 </div>
 
+<!-- CAROUSEL SECTION -->
+<div class="carousel-wrapper">
+    <div class="carousel-track">
+
+        <div class="carousel-item" style="background-image:url('car1.jpg');"></div>
+        <div class="carousel-item" style="background-image:url('car2.jpg');"></div>
+        <div class="carousel-item" style="background-image:url('car3.jpg');"></div>
+        <div class="carousel-item" style="background-image:url('car4.jpg');"></div>
+        <div class="carousel-item" style="background-image:url('car5.jpg');"></div>
+        <div class="carousel-item" style="background-image:url('car6.jpg');"></div>
+
+        <!-- Duplicate for seamless loop -->
+        <div class="carousel-item" style="background-image:url('car1.jpg');"></div>
+        <div class="carousel-item" style="background-image:url('car2.jpg');"></div>
+        <div class="carousel-item" style="background-image:url('car3.jpg');"></div>
+
+    </div>
+</div>
+
 <!-- LINKS SECTION -->
 <div class="links-section">
     <h2 class="links-title">Links</h2>
@@ -243,55 +293,30 @@
 
 <!-- ABOUT ME SECTION -->
 <div class="about-section">
-  
     <div class="about-container">
-       
+
         <img src="portraitme.png" class="about-photo" alt="Portrait">
-    
 
         <div class="about-text">
-           <h2>About Me</h2>
-    
-                <p>
-                I’m a Melbourne based photographer with over 15 years of experience behind the camera, capturing real moments, real people, and real stories.
-                </p>
-                
-                <p>
-                My work is grounded in observation and timing. I don’t just take photos, I read the scene, anticipate moments, and capture them in a way that feels natural and honest. Whether it’s a busy street, a quiet portrait, or a high energy event, I focus on creating images that feel alive and authentic.
-                </p>
-                
-                <p>
-                I shoot with a mix of documentary and creative style. While I’m known for strong black and white work, I also deliver clean, vibrant colour images depending on the project and what suits the story best. Every photo is carefully edited from RAW to ensure a polished and professional result.
-                </p>
-                
-                <p>
-                My approach is simple. Make people feel comfortable, stay present, and let moments unfold. That’s where the best images come from.
-                </p>
-                
-                <h3>Work With Me</h3>
-                
-                <p>
-                If you’re looking for a photographer who is reliable, easy to work with, and focused on quality, I’d love to collaborate.
-                </p>
-                
-                  <p>Event coverage<p>
-                  <p>Portraits and headshots</p>
-                  <p>Street and pfestyle sessions</p>
-                  <p>Brand and content creation</p>
-                  <p>Creative and documentary style shoots</p>
-              
-                
-                <p>
-                I can also work alongside your team, including content creators or videographers, to deliver a complete package if needed.
-                </p>
-                
-                <p>
-                Whether you need strong visuals for your brand, coverage for an event, or something more personal, I’ll work with you to make sure you get images that actually matter and stand out.
-                </p>
-                
-                <p>
-                Send me a message and let’s lock something in.
-                </p>
+            <h2>About Me</h2>
+
+            <p>I’m a Melbourne based photographer with over 15 years of experience behind the camera, capturing real moments, real people, and real stories.</p>
+
+            <p>My work is grounded in observation and timing. I don’t just take photos, I read the scene, anticipate moments, and capture them in a way that feels natural and honest.</p>
+
+            <p>I shoot with a mix of documentary and creative style. While I’m known for strong black and white work, I also deliver clean, vibrant colour images depending on the project.</p>
+
+            <h3>Work With Me</h3>
+
+            <p>Event coverage</p>
+            <p>Portraits and headshots</p>
+            <p>Street and lifestyle sessions</p>
+            <p>Brand and content creation</p>
+            <p>Creative and documentary style shoots</p>
+
+            <p>I can also work alongside your team, including content creators or videographers.</p>
+
+            <p>Send me a message and let’s lock something in.</p>
         </div>
 
     </div>
