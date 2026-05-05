@@ -20,7 +20,6 @@
         font-weight: 700;
     }
 
-    /* Container for all packages */
     .package-grid {
         max-width: 900px;
         margin: 40px auto;
@@ -29,7 +28,6 @@
         gap: 30px;
     }
 
-    /* Full-image button style */
     .package-button {
         position: relative;
         height: 260px;
@@ -46,12 +44,10 @@
         box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
     }
 
-    /* Background images (replace with your own) */
     .basic-img    { background: url('basic.jpg') center/cover no-repeat; }
     .halfday-img  { background: url('halfday.jpg') center/cover no-repeat; }
     .fullday-img  { background: url('fullday.jpg') center/cover no-repeat; }
 
-    /* Dark overlay */
     .overlay {
         position: absolute;
         inset: 0;
@@ -63,35 +59,45 @@
         background: rgba(0, 0, 0, 0.25);
     }
 
-    /* Text on image */
     .label {
         position: absolute;
-        top: 50%;
+        top: 45%;
         left: 50%;
         transform: translate(-50%, -50%);
         color: white;
-        font-size: 1.8rem;
+        font-size: 1.9rem;
         font-weight: 700;
-        letter-spacing: 1px;
         text-shadow: 0 0 12px rgba(0,0,0,0.7);
         pointer-events: none;
+        white-space: nowrap;
     }
 
     .subtext {
         position: absolute;
-        top: 62%;
+        top: 63%;
         left: 50%;
         transform: translate(-50%, -50%);
         color: #f2f2f2;
-        font-size: 1rem;
+        font-size: 1.05rem;
         opacity: 0.9;
         pointer-events: none;
+        white-space: nowrap;
     }
 
-    /* Mobile */
+    /* MOBILE FIXES */
     @media (max-width: 700px) {
         .package-button {
-            height: 220px;
+            height: 300px; /* more vertical space */
+        }
+
+        .label {
+            font-size: 1.6rem;
+            top: 42%; /* move slightly up */
+        }
+
+        .subtext {
+            font-size: 0.95rem;
+            top: 68%; /* move lower to avoid overlap */
         }
     }
 </style>
