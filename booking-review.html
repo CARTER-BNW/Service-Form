@@ -6,69 +6,168 @@
 <title>Review Booking — Carter BNW</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: "Inter", sans-serif; background: #0d0d0d; color: #f2f2f2; min-height: 100vh; text-align: center; }
-.back { position: absolute; left: 20px; top: 22px; color: #aaa; text-decoration: none; font-size: 0.9rem; letter-spacing: 0.04em; transition: color 0.2s; }
+body {
+  font-family: "Inter", sans-serif;
+  background: #0d0d0d; color: #f2f2f2;
+  min-height: 100vh; text-align: center;
+  -webkit-font-smoothing: antialiased;
+}
+.back {
+  position: absolute; left: 20px; top: 22px;
+  color: #777; text-decoration: none; font-size: 0.88rem;
+  transition: color 0.2s;
+}
 .back:hover { color: #fff; }
-header { padding: 52px 20px 6px; font-size: 2.2rem; font-weight: 700; }
-.step { font-size: 0.95rem; color: #888; margin: 10px 0 40px; }
-.container { max-width: 640px; margin: 0 auto; padding: 0 20px 80px; }
+header { padding: 52px 20px 6px; font-size: 2rem; font-weight: 700; }
+.step  { font-size: 0.9rem; color: #777; margin: 10px 0 36px; }
 
-/* Summary card */
+.container { max-width: 600px; margin: 0 auto; padding: 0 20px 80px; }
+
+/* ── CARDS ───────────────────────────────────────────────── */
 .card {
-  background: #1a1a1a; border-radius: 16px; border: 1px solid #2a2a2a;
-  margin-bottom: 20px; text-align: left; overflow: hidden;
+  background: #141414;
+  border-radius: 14px; border: 1px solid #242424;
+  margin-bottom: 14px; text-align: left;
+  overflow: hidden;           /* fixes overlay bleed */
 }
-.card-header {
-  padding: 18px 24px; background: #141414; border-bottom: 1px solid #2a2a2a;
-  font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: #888;
+.card-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid #1e1e1e;
 }
-.row { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 24px; border-bottom: 1px solid #1f1f1f; gap: 16px; }
+.card-title {
+  font-size: 0.7rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: #666;
+}
+.change-link {
+  font-size: 0.78rem; color: #666; text-decoration: none;
+  border: 1px solid #2a2a2a; border-radius: 20px;
+  padding: 4px 12px; transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+.change-link:hover { color: #fff; border-color: #555; }
+
+/* Row */
+.row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 13px 20px; border-bottom: 1px solid #1a1a1a; gap: 12px;
+}
 .row:last-child { border-bottom: none; }
-.row-label { font-size: 0.85rem; color: #888; flex-shrink: 0; }
-.row-value { font-size: 0.95rem; color: #f2f2f2; text-align: right; }
+.row-label { font-size: 0.82rem; color: #666; flex-shrink: 0; }
+.row-value { font-size: 0.92rem; color: #e8e8e8; text-align: right; }
 
-/* Add-ons card */
-.addon-card { background: #1a1a1a; border-radius: 16px; border: 1px solid #2a2a2a; margin-bottom: 20px; text-align: left; }
-.addon-header { padding: 18px 24px; background: #141414; border-bottom: 1px solid #2a2a2a; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: #888; }
-.addon-note { padding: 12px 24px 0; font-size: 0.82rem; color: #666; }
-.addon-item { display: flex; align-items: center; gap: 14px; padding: 16px 24px; border-bottom: 1px solid #1f1f1f; cursor: pointer; transition: background 0.2s; }
-.addon-item:last-child { border-bottom: none; }
-.addon-item:hover { background: #1e1e1e; }
-.addon-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: #fff; cursor: pointer; flex-shrink: 0; }
-.addon-text { flex: 1; }
-.addon-name { font-size: 0.95rem; color: #f2f2f2; }
-.addon-price { font-size: 0.85rem; color: #888; margin-top: 2px; }
-
-/* Confirm button */
-.btn-confirm {
-  display: block; width: 100%; padding: 20px;
-  background: #fff; color: #0d0d0d;
-  font-size: 1.1rem; font-weight: 700; letter-spacing: 0.04em;
-  border: none; border-radius: 12px; cursor: pointer;
-  transition: background 0.2s, transform 0.15s;
-  margin-bottom: 16px;
+/* ── INLINE EDIT (contact details) ──────────────────────── */
+.edit-btn {
+  font-size: 0.78rem; color: #666; cursor: pointer;
+  border: 1px solid #2a2a2a; border-radius: 20px;
+  padding: 4px 12px; background: none;
+  transition: color 0.2s, border-color 0.2s;
 }
-.btn-confirm:hover { background: #e8e8e8; }
-.btn-confirm:active { transform: scale(0.98); }
-.btn-confirm:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-.footer-note { font-size: 0.8rem; color: #666; line-height: 1.6; }
-.footer-note a { color: #888; text-decoration: underline; }
+.edit-btn:hover { color: #fff; border-color: #555; }
 
-/* Error message */
-.error-msg { background: #2a1a1a; border: 1px solid #5a2a2a; border-radius: 10px; padding: 16px 20px; margin-bottom: 20px; font-size: 0.9rem; color: #ff8888; display: none; text-align: left; }
+/* Edit form (hidden by default) */
+.edit-form { display: none; padding: 16px 20px 20px; }
+.edit-form.open { display: block; }
+
+.edit-form input,
+.edit-form textarea {
+  width: 100%; padding: 11px 14px;
+  background: #0d0d0d; border: 1px solid #2e2e2e;
+  border-radius: 8px; color: #f2f2f2; font-size: 0.9rem;
+  font-family: inherit;
+  outline: none; margin-bottom: 10px;
+  transition: border-color 0.2s;
+}
+.edit-form input:focus,
+.edit-form textarea:focus { border-color: #555; }
+.edit-form textarea { height: 80px; resize: none; }
+.save-btn {
+  background: #fff; color: #000;
+  border: none; border-radius: 8px;
+  padding: 10px 22px; font-size: 0.88rem; font-weight: 600;
+  cursor: pointer; transition: background 0.2s;
+}
+.save-btn:hover { background: #e0e0e0; }
+
+/* ── ADD-ONS ─────────────────────────────────────────────── */
+.addon-card {
+  background: #141414;
+  border-radius: 14px; border: 1px solid #242424;
+  margin-bottom: 14px; text-align: left;
+  overflow: hidden;           /* fixes background bleed */
+}
+.addon-head {
+  padding: 14px 20px; border-bottom: 1px solid #1e1e1e;
+  font-size: 0.7rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: #666;
+}
+.addon-note {
+  padding: 12px 20px 4px;
+  font-size: 0.8rem; color: #555; line-height: 1.5;
+}
+.addon-label {
+  display: flex; align-items: center; gap: 14px;
+  padding: 15px 20px; border-bottom: 1px solid #1a1a1a;
+  cursor: pointer; transition: background 0.15s;
+}
+.addon-label:last-child { border-bottom: none; }
+.addon-label:hover { background: #181818; }
+.addon-label input[type="checkbox"] {
+  width: 17px; height: 17px;
+  accent-color: #fff; cursor: pointer; flex-shrink: 0;
+}
+.addon-text-wrap { flex: 1; }
+.addon-name  { font-size: 0.92rem; color: #e0e0e0; }
+.addon-price { font-size: 0.8rem; color: #666; margin-top: 2px; }
+
+/* ── ERROR ───────────────────────────────────────────────── */
+.error-box {
+  background: #1e1010; border: 1px solid #4a1f1f;
+  border-radius: 10px; padding: 14px 18px;
+  font-size: 0.88rem; color: #f08080;
+  margin-bottom: 14px; text-align: left; display: none;
+}
+.error-box a { color: #f08080; text-decoration: underline; }
+
+/* ── CONFIRM BUTTON ──────────────────────────────────────── */
+.btn-confirm {
+  width: 100%; padding: 18px;
+  background: #fff; color: #0d0d0d;
+  border: none; border-radius: 12px;
+  font-size: 1rem; font-weight: 700; letter-spacing: 0.03em;
+  cursor: pointer; transition: background 0.2s, transform 0.15s;
+  margin-bottom: 14px;
+}
+.btn-confirm:hover:not(:disabled) { background: #e4e4e4; }
+.btn-confirm:active:not(:disabled) { transform: scale(0.98); }
+.btn-confirm:disabled { opacity: 0.45; cursor: not-allowed; }
+.footer-note {
+  font-size: 0.78rem; color: #555; line-height: 1.65;
+}
+.footer-note a { color: #777; text-decoration: underline; }
+
+/* ── MOBILE ──────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  header { font-size: 1.7rem; }
+  .row { flex-direction: column; gap: 3px; }
+  .row-value { text-align: left; color: #ccc; }
+  .card-head { flex-wrap: wrap; gap: 8px; }
+}
 </style>
 </head>
 <body>
 
 <a class="back" href="contact.html">← Back</a>
 <header>Review Booking</header>
-<p class="step">Step 5 of 6 — Confirm Your Details</p>
+<p class="step">Step 5 of 6 — Confirm your details</p>
 
 <div class="container">
 
-  <!-- Booking summary -->
+  <!-- Booking details -->
   <div class="card">
-    <div class="card-header">Your Booking</div>
+    <div class="card-head">
+      <span class="card-title">Service &amp; Package</span>
+      <a class="change-link" href="index.html">Change service</a>
+    </div>
     <div class="row">
       <span class="row-label">Service</span>
       <span class="row-value" id="r-service">—</span>
@@ -77,117 +176,188 @@ header { padding: 52px 20px 6px; font-size: 2.2rem; font-weight: 700; }
       <span class="row-label">Package</span>
       <span class="row-value" id="r-package">—</span>
     </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <span class="card-title">Date &amp; Time</span>
+      <a class="change-link" href="calendar.html">Change date</a>
+    </div>
     <div class="row">
       <span class="row-label">Date</span>
       <span class="row-value" id="r-date">—</span>
     </div>
     <div class="row">
-      <span class="row-label">Start Time</span>
+      <span class="row-label">Start time</span>
       <span class="row-value" id="r-time">—</span>
     </div>
   </div>
 
-  <!-- Contact details -->
-  <div class="card">
-    <div class="card-header">Your Details</div>
-    <div class="row">
-      <span class="row-label">Name</span>
-      <span class="row-value" id="r-name">—</span>
+  <!-- Contact details — editable inline -->
+  <div class="card" id="detailsCard">
+    <div class="card-head">
+      <span class="card-title">Your Details</span>
+      <button class="edit-btn" id="editToggle">Edit</button>
     </div>
-    <div class="row">
-      <span class="row-label">Email</span>
-      <span class="row-value" id="r-email">—</span>
+
+    <!-- Display mode -->
+    <div id="detailsDisplay">
+      <div class="row">
+        <span class="row-label">Name</span>
+        <span class="row-value" id="r-name">—</span>
+      </div>
+      <div class="row">
+        <span class="row-label">Email</span>
+        <span class="row-value" id="r-email">—</span>
+      </div>
+      <div class="row">
+        <span class="row-label">Phone</span>
+        <span class="row-value" id="r-phone">—</span>
+      </div>
+      <div class="row" id="r-notes-row" style="display:none;">
+        <span class="row-label">Notes</span>
+        <span class="row-value" id="r-notes" style="max-width:58%;"></span>
+      </div>
     </div>
-    <div class="row">
-      <span class="row-label">Phone</span>
-      <span class="row-value" id="r-phone">—</span>
-    </div>
-    <div class="row" id="r-comments-row" style="display:none;">
-      <span class="row-label">Notes</span>
-      <span class="row-value" id="r-comments" style="max-width:60%;">—</span>
+
+    <!-- Edit form (hidden until Edit is clicked) -->
+    <div class="edit-form" id="editForm">
+      <input  id="e-fname"  type="text"  placeholder="First Name">
+      <input  id="e-lname"  type="text"  placeholder="Last Name">
+      <input  id="e-email"  type="email" placeholder="Email">
+      <input  id="e-phone"  type="tel"   placeholder="Phone Number">
+      <textarea id="e-notes" placeholder="Additional notes (optional)"></textarea>
+      <button class="save-btn" id="saveDetails">Save changes</button>
     </div>
   </div>
 
-  <!-- Optional Add-ons -->
+  <!-- Add-ons -->
   <div class="addon-card">
-    <div class="addon-header">Optional Add-Ons</div>
-    <p class="addon-note">Select any extras to include with your booking.</p>
-    <label class="addon-item">
+    <div class="addon-head">Optional Add-Ons</div>
+    <p class="addon-note">Add extras to your booking — final pricing confirmed with Carter.</p>
+    <label class="addon-label">
       <input type="checkbox" id="addon-hour">
-      <div class="addon-text">
+      <div class="addon-text-wrap">
         <div class="addon-name">Additional Hour</div>
         <div class="addon-price">+$350</div>
       </div>
     </label>
-    <label class="addon-item">
+    <label class="addon-label">
       <input type="checkbox" id="addon-rush">
-      <div class="addon-text">
+      <div class="addon-text-wrap">
         <div class="addon-name">Rush Delivery — 48 hrs</div>
         <div class="addon-price">+$1,000</div>
       </div>
     </label>
   </div>
 
-  <!-- Error message -->
-  <div class="error-msg" id="error-msg">
-    Something went wrong sending your booking. Please try again, or contact directly at
-    <a href="mailto:bnw.carter@gmail.com">bnw.carter@gmail.com</a>.
+  <!-- Error -->
+  <div class="error-box" id="errorBox">
+    Something went wrong. Please try again, or contact
+    <a href="mailto:bnw.carter@gmail.com">bnw.carter@gmail.com</a> directly.
   </div>
 
   <!-- Submit -->
   <button class="btn-confirm" id="confirmBtn">Confirm Booking →</button>
   <p class="footer-note">
-    By confirming, Carter will receive your booking request and be in touch shortly to finalise the date.<br>
-    No payment is taken at this stage.
+    No payment is taken now — Carter will be in touch to finalise everything.<br>
+    Questions? <a href="mailto:bnw.carter@gmail.com">bnw.carter@gmail.com</a>
+    &nbsp;·&nbsp; <a href="https://wa.me/61412887096">WhatsApp</a>
   </p>
 
 </div>
 
 <script>
-/* ─── FORMSPREE SETUP ───────────────────────────────────────────────
-   1. Go to https://formspree.io and sign up (free)
-   2. Click "New Form", name it "Carter BNW Bookings"
-   3. Copy your endpoint — it looks like https://formspree.io/f/abcdefgh
-   4. Paste it below, replacing YOUR_FORMSPREE_ENDPOINT
-   ──────────────────────────────────────────────────────────────── */
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mojzrgwa';
+/* ── FORMSPREE ─────────────────────────────────────────────────────
+   Replace YOUR_FORMSPREE_ENDPOINT with your actual endpoint from
+   https://formspree.io — e.g. https://formspree.io/f/abcdefgh
+   ────────────────────────────────────────────────────────────────── */
+const FORMSPREE = 'YOUR_FORMSPREE_ENDPOINT';
 
-/* ─── POPULATE REVIEW FIELDS ──────────────────────────────────── */
-const get = key => localStorage.getItem(key) || '';
+/* ── HELPERS ──────────────────────────────────────────────────── */
+const get = k => localStorage.getItem(k) || '';
+const set = (k, v) => localStorage.setItem(k, v);
 
-document.getElementById('r-service').textContent  = get('service')  || '—';
-document.getElementById('r-package').textContent  = get('package')  || '—';
-document.getElementById('r-date').textContent     = get('date')     || '—';
-document.getElementById('r-time').textContent     = get('time')     || '—';
+/* ── POPULATE DISPLAY ─────────────────────────────────────────── */
+function refresh() {
+  document.getElementById('r-service').textContent = get('service') || '—';
+  document.getElementById('r-package').textContent = get('package') || '—';
+  document.getElementById('r-date').textContent    = get('date')    || '—';
+  document.getElementById('r-time').textContent    = get('time')    || '—';
 
-const name = [get('fname'), get('lname')].filter(Boolean).join(' ');
-document.getElementById('r-name').textContent  = name  || '—';
-document.getElementById('r-email').textContent = get('email') || '—';
-document.getElementById('r-phone').textContent = get('phone') || '—';
+  const name = [get('fname'), get('lname')].filter(Boolean).join(' ');
+  document.getElementById('r-name').textContent  = name            || '—';
+  document.getElementById('r-email').textContent = get('email')    || '—';
+  document.getElementById('r-phone').textContent = get('phone')    || '—';
 
-const comments = get('comments');
-if (comments) {
-  document.getElementById('r-comments').textContent = comments;
-  document.getElementById('r-comments-row').style.display = 'flex';
+  const notes = get('comments');
+  const notesRow = document.getElementById('r-notes-row');
+  if (notes) {
+    document.getElementById('r-notes').textContent = notes;
+    notesRow.style.display = 'flex';
+  } else {
+    notesRow.style.display = 'none';
+  }
 }
+refresh();
 
-/* ─── CONFIRM & SUBMIT ────────────────────────────────────────── */
+/* ── INLINE EDIT TOGGLE ───────────────────────────────────────── */
+const editToggle   = document.getElementById('editToggle');
+const editForm     = document.getElementById('editForm');
+const detailsDisp  = document.getElementById('detailsDisplay');
+
+editToggle.addEventListener('click', () => {
+  const isOpen = editForm.classList.contains('open');
+  if (isOpen) {
+    editForm.classList.remove('open');
+    detailsDisp.style.display = '';
+    editToggle.textContent = 'Edit';
+  } else {
+    // Pre-fill form fields from localStorage
+    document.getElementById('e-fname').value = get('fname');
+    document.getElementById('e-lname').value = get('lname');
+    document.getElementById('e-email').value = get('email');
+    document.getElementById('e-phone').value = get('phone');
+    document.getElementById('e-notes').value = get('comments');
+
+    editForm.classList.add('open');
+    detailsDisp.style.display = 'none';
+    editToggle.textContent = 'Cancel';
+    document.getElementById('e-fname').focus();
+  }
+});
+
+document.getElementById('saveDetails').addEventListener('click', () => {
+  set('fname',    document.getElementById('e-fname').value.trim());
+  set('lname',    document.getElementById('e-lname').value.trim());
+  set('email',    document.getElementById('e-email').value.trim());
+  set('phone',    document.getElementById('e-phone').value.trim());
+  set('comments', document.getElementById('e-notes').value.trim());
+
+  editForm.classList.remove('open');
+  detailsDisp.style.display = '';
+  editToggle.textContent = 'Edit';
+  refresh();
+});
+
+/* ── SUBMIT ───────────────────────────────────────────────────── */
 document.getElementById('confirmBtn').addEventListener('click', async () => {
-  if (FORMSPREE_ENDPOINT === 'YOUR_FORMSPREE_ENDPOINT') {
-    alert('Formspree endpoint not set yet — see the comment inside booking-review.html.');
+  if (FORMSPREE === 'YOUR_FORMSPREE_ENDPOINT') {
+    alert('Formspree endpoint not set — open booking-review.html and replace YOUR_FORMSPREE_ENDPOINT.');
     return;
   }
 
-  const btn = document.getElementById('confirmBtn');
-  const errorMsg = document.getElementById('error-msg');
-  errorMsg.style.display = 'none';
+  const btn      = document.getElementById('confirmBtn');
+  const errorBox = document.getElementById('errorBox');
+  errorBox.style.display = 'none';
   btn.disabled = true;
   btn.textContent = 'Sending…';
 
-  // Collect add-ons
   const addons = [];
-  if (document.getElementById('addon-hour').checked)  addons.push('Additional Hour (+$350)');
-  if (document.getElementById('addon-rush').checked)  addons.push('Rush Delivery 48hrs (+$1,000)');
+  if (document.getElementById('addon-hour').checked) addons.push('Additional Hour (+$350)');
+  if (document.getElementById('addon-rush').checked) addons.push('Rush Delivery 48hrs (+$1,000)');
+
+  const name = [get('fname'), get('lname')].filter(Boolean).join(' ');
 
   const payload = {
     _subject: `New Booking: ${get('service')} — ${name || get('email')}`,
@@ -203,21 +373,20 @@ document.getElementById('confirmBtn').addEventListener('click', async () => {
   };
 
   try {
-    const res = await fetch(FORMSPREE_ENDPOINT, {
-      method: 'POST',
+    const res = await fetch(FORMSPREE, {
+      method:  'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(payload),
+      body:    JSON.stringify(payload),
     });
-
     if (res.ok) {
       window.location.href = 'booking-confirmed.html';
     } else {
-      throw new Error('Server error');
+      throw new Error();
     }
   } catch {
     btn.disabled = false;
     btn.textContent = 'Confirm Booking →';
-    errorMsg.style.display = 'block';
+    errorBox.style.display = 'block';
   }
 });
 </script>
