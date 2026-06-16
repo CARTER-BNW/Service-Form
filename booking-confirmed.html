@@ -3,65 +3,121 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Booking Confirmed</title>
-
+<title>Booking Confirmed — Carter BNW</title>
 <style>
-    body {
-        margin: 0;
-        font-family: "Inter", sans-serif;
-        background: #0d0d0d;
-        color: #fff;
-        text-align: center;
-        animation: fadeIn 0.8s ease;
-    }
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    header {
-        padding: 60px 20px 10px;
-        font-size: 2.4rem;
-        font-weight: 700;
-    }
-    .step {
-        font-size: 1rem;
-        color: #ccc;
-        margin-bottom: 20px;
-    }
-    p {
-        font-size: 1.4rem;
-        max-width: 600px;
-        margin: 20px auto;
-        color: #ccc;
-    }
-    .button {
-        display: inline-block;
-        margin-top: 40px;
-        padding: 16px 30px;
-        background: #333;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 12px;
-        font-size: 1.2rem;
-        transition: 0.25s;
-    }
-    .button:hover { background: #444; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: "Inter", sans-serif; background: #0d0d0d; color: #f2f2f2;
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; padding: 40px 20px; text-align: center;
+}
+
+/* Animated tick */
+.tick-wrap { width: 72px; height: 72px; margin: 0 auto 32px; position: relative; }
+.tick-circle {
+  width: 72px; height: 72px; border-radius: 50%;
+  border: 2px solid #fff;
+  animation: pop 0.4s cubic-bezier(0.175,0.885,0.32,1.275) both;
+}
+@keyframes pop { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.tick {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -55%);
+  font-size: 2rem; color: #fff;
+  animation: fadeUp 0.3s 0.25s ease both;
+}
+@keyframes fadeUp { from { opacity: 0; transform: translate(-50%, -40%); } to { opacity: 1; transform: translate(-50%, -55%); } }
+
+.heading { font-size: 2rem; font-weight: 700; margin-bottom: 12px; animation: fadeUp2 0.4s 0.3s ease both; }
+.subtext { font-size: 1rem; color: #aaa; line-height: 1.7; max-width: 420px; animation: fadeUp2 0.4s 0.4s ease both; }
+@keyframes fadeUp2 { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Summary */
+.summary {
+  background: #1a1a1a; border-radius: 14px; border: 1px solid #2a2a2a;
+  margin: 32px 0; max-width: 480px; width: 100%; text-align: left;
+  animation: fadeUp2 0.4s 0.5s ease both;
+}
+.summary-row { display: flex; justify-content: space-between; gap: 12px; padding: 12px 20px; border-bottom: 1px solid #1f1f1f; }
+.summary-row:last-child { border-bottom: none; }
+.summary-label { font-size: 0.82rem; color: #777; flex-shrink: 0; }
+.summary-value { font-size: 0.9rem; color: #f2f2f2; text-align: right; }
+
+/* Contact line */
+.contact-line { font-size: 0.85rem; color: #666; max-width: 420px; animation: fadeUp2 0.4s 0.6s ease both; }
+.contact-line a { color: #aaa; text-decoration: underline; }
+
+/* Home button */
+.btn-home {
+  display: inline-block; margin-top: 36px; padding: 16px 36px;
+  background: #fff; color: #0d0d0d; border-radius: 10px;
+  font-size: 0.95rem; font-weight: 700; text-decoration: none;
+  transition: background 0.2s; animation: fadeUp2 0.4s 0.65s ease both;
+}
+.btn-home:hover { background: #e8e8e8; }
 </style>
 </head>
 <body>
 
-<header>Booking Confirmed</header>
-<div class="step">Step 6 of 6 — Thank You</div>
+<div class="tick-wrap">
+  <div class="tick-circle"></div>
+  <div class="tick">✓</div>
+</div>
 
-<p>Thank you for your booking.  
-I’ll be in touch shortly to confirm all details and next steps.</p>
+<h1 class="heading">Booking Request Sent</h1>
+<p class="subtext">
+  Thanks — your request has been received.<br>
+  Carter will be in touch shortly to confirm your date and finalise the details.
+</p>
 
-<a class="button" href="index.html">Return Home</a>
+<div class="summary" id="summary">
+  <div class="summary-row">
+    <span class="summary-label">Service</span>
+    <span class="summary-value" id="c-service">—</span>
+  </div>
+  <div class="summary-row">
+    <span class="summary-label">Package</span>
+    <span class="summary-value" id="c-package">—</span>
+  </div>
+  <div class="summary-row">
+    <span class="summary-label">Date &amp; Time</span>
+    <span class="summary-value" id="c-datetime">—</span>
+  </div>
+  <div class="summary-row">
+    <span class="summary-label">Name</span>
+    <span class="summary-value" id="c-name">—</span>
+  </div>
+  <div class="summary-row">
+    <span class="summary-label">Email</span>
+    <span class="summary-value" id="c-email">—</span>
+  </div>
+</div>
+
+<p class="contact-line">
+  Questions? Reach out directly at
+  <a href="mailto:bnw.carter@gmail.com">bnw.carter@gmail.com</a>
+  or via <a href="https://wa.me/61412887096" target="_blank">WhatsApp</a>.
+</p>
+
+<a class="btn-home" href="index.html">← Back to Home</a>
 
 <script>
-// optional: clear stored data
-localStorage.clear();
-</script>
+const get = k => localStorage.getItem(k) || '';
 
+document.getElementById('c-service').textContent  = get('service')  || '—';
+document.getElementById('c-package').textContent  = get('package')  || '—';
+
+const date = get('date'), time = get('time');
+document.getElementById('c-datetime').textContent =
+  (date && time) ? `${date} at ${time}` : (date || time || '—');
+
+const name = [get('fname'), get('lname')].filter(Boolean).join(' ');
+document.getElementById('c-name').textContent  = name  || '—';
+document.getElementById('c-email').textContent = get('email') || '—';
+
+// Clear booking data so the form is fresh next time
+['service','package','date','time','fname','lname','email','phone','comments','backUrl']
+  .forEach(k => localStorage.removeItem(k));
+</script>
 </body>
 </html>
