@@ -3,153 +3,223 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Review Your Booking</title>
-
+<title>Review Booking — Carter BNW</title>
 <style>
-    body {
-        margin: 0;
-        font-family: "Inter", sans-serif;
-        background: #0d0d0d;
-        color: #fff;
-        text-align: center;
-    }
-    .back {
-        position: absolute;
-        left: 20px;
-        top: 20px;
-        color: #f2f2f2;
-        text-decoration: none;
-        font-size: 0.95rem;
-    }
-    header {
-        padding: 40px 20px 5px;
-        font-size: 2.2rem;
-        font-weight: 700;
-    }
-    .step {
-        font-size: 1rem;
-        color: #ccc;
-        margin-bottom: 20px;
-    }
-    .box {
-        width: 95%;
-        max-width: 600px;
-        margin: 40px auto;
-        background: #1a1a1a;
-        padding: 35px;
-        border-radius: 16px;
-        border: 1px solid #333;
-        animation: fadeIn 0.6s ease;
-        box-sizing: border-box;
-        text-align: left;
-    }
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    .row {
-        margin-bottom: 18px;
-        font-size: 1.2rem;
-    }
-    .label {
-        font-weight: 700;
-        color: #ccc;
-    }
-    .button {
-        display: block;
-        margin: 40px auto;
-        padding: 18px;
-        width: 80%;
-        background: #333;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 12px;
-        font-size: 1.3rem;
-        transition: 0.25s;
-        text-align: center;
-        cursor: pointer;
-    }
-    .button:hover { background: #444; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Inter", sans-serif; background: #0d0d0d; color: #f2f2f2; min-height: 100vh; text-align: center; }
+.back { position: absolute; left: 20px; top: 22px; color: #aaa; text-decoration: none; font-size: 0.9rem; letter-spacing: 0.04em; transition: color 0.2s; }
+.back:hover { color: #fff; }
+header { padding: 52px 20px 6px; font-size: 2.2rem; font-weight: 700; }
+.step { font-size: 0.95rem; color: #888; margin: 10px 0 40px; }
+.container { max-width: 640px; margin: 0 auto; padding: 0 20px 80px; }
+
+/* Summary card */
+.card {
+  background: #1a1a1a; border-radius: 16px; border: 1px solid #2a2a2a;
+  margin-bottom: 20px; text-align: left; overflow: hidden;
+}
+.card-header {
+  padding: 18px 24px; background: #141414; border-bottom: 1px solid #2a2a2a;
+  font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: #888;
+}
+.row { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 24px; border-bottom: 1px solid #1f1f1f; gap: 16px; }
+.row:last-child { border-bottom: none; }
+.row-label { font-size: 0.85rem; color: #888; flex-shrink: 0; }
+.row-value { font-size: 0.95rem; color: #f2f2f2; text-align: right; }
+
+/* Add-ons card */
+.addon-card { background: #1a1a1a; border-radius: 16px; border: 1px solid #2a2a2a; margin-bottom: 20px; text-align: left; }
+.addon-header { padding: 18px 24px; background: #141414; border-bottom: 1px solid #2a2a2a; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: #888; }
+.addon-note { padding: 12px 24px 0; font-size: 0.82rem; color: #666; }
+.addon-item { display: flex; align-items: center; gap: 14px; padding: 16px 24px; border-bottom: 1px solid #1f1f1f; cursor: pointer; transition: background 0.2s; }
+.addon-item:last-child { border-bottom: none; }
+.addon-item:hover { background: #1e1e1e; }
+.addon-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: #fff; cursor: pointer; flex-shrink: 0; }
+.addon-text { flex: 1; }
+.addon-name { font-size: 0.95rem; color: #f2f2f2; }
+.addon-price { font-size: 0.85rem; color: #888; margin-top: 2px; }
+
+/* Confirm button */
+.btn-confirm {
+  display: block; width: 100%; padding: 20px;
+  background: #fff; color: #0d0d0d;
+  font-size: 1.1rem; font-weight: 700; letter-spacing: 0.04em;
+  border: none; border-radius: 12px; cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  margin-bottom: 16px;
+}
+.btn-confirm:hover { background: #e8e8e8; }
+.btn-confirm:active { transform: scale(0.98); }
+.btn-confirm:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.footer-note { font-size: 0.8rem; color: #666; line-height: 1.6; }
+.footer-note a { color: #888; text-decoration: underline; }
+
+/* Error message */
+.error-msg { background: #2a1a1a; border: 1px solid #5a2a2a; border-radius: 10px; padding: 16px 20px; margin-bottom: 20px; font-size: 0.9rem; color: #ff8888; display: none; text-align: left; }
 </style>
 </head>
 <body>
 
 <a class="back" href="contact.html">← Back</a>
-<header>Review Your Booking</header>
-<div class="step">Step 5 of 6 — Confirm Details</div>
+<header>Review Booking</header>
+<p class="step">Step 5 of 6 — Confirm Your Details</p>
 
-<div class="box">
-    <div class="row"><span class="label">Service:</span> <span id="service"></span></div>
-    <div class="row"><span class="label">Package:</span> <span id="package"></span></div>
-    <div class="row"><span class="label">Date:</span> <span id="date"></span></div>
-    <div class="row"><span class="label">Time:</span> <span id="time"></span></div>
-    <div class="row"><span class="label">First Name:</span> <span id="fname"></span></div>
-    <div class="row"><span class="label">Last Name:</span> <span id="lname"></span></div>
-    <div class="row"><span class="label">Email:</span> <span id="email"></span></div>
-    <div class="row"><span class="label">Phone:</span> <span id="phone"></span></div>
-    <div class="row"><span class="label">Comments:</span> <span id="comments"></span></div>
+<div class="container">
+
+  <!-- Booking summary -->
+  <div class="card">
+    <div class="card-header">Your Booking</div>
+    <div class="row">
+      <span class="row-label">Service</span>
+      <span class="row-value" id="r-service">—</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Package</span>
+      <span class="row-value" id="r-package">—</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Date</span>
+      <span class="row-value" id="r-date">—</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Start Time</span>
+      <span class="row-value" id="r-time">—</span>
+    </div>
+  </div>
+
+  <!-- Contact details -->
+  <div class="card">
+    <div class="card-header">Your Details</div>
+    <div class="row">
+      <span class="row-label">Name</span>
+      <span class="row-value" id="r-name">—</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Email</span>
+      <span class="row-value" id="r-email">—</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Phone</span>
+      <span class="row-value" id="r-phone">—</span>
+    </div>
+    <div class="row" id="r-comments-row" style="display:none;">
+      <span class="row-label">Notes</span>
+      <span class="row-value" id="r-comments" style="max-width:60%;">—</span>
+    </div>
+  </div>
+
+  <!-- Optional Add-ons -->
+  <div class="addon-card">
+    <div class="addon-header">Optional Add-Ons</div>
+    <p class="addon-note">Select any extras to include with your booking.</p>
+    <label class="addon-item">
+      <input type="checkbox" id="addon-hour">
+      <div class="addon-text">
+        <div class="addon-name">Additional Hour</div>
+        <div class="addon-price">+$350</div>
+      </div>
+    </label>
+    <label class="addon-item">
+      <input type="checkbox" id="addon-rush">
+      <div class="addon-text">
+        <div class="addon-name">Rush Delivery — 48 hrs</div>
+        <div class="addon-price">+$1,000</div>
+      </div>
+    </label>
+  </div>
+
+  <!-- Error message -->
+  <div class="error-msg" id="error-msg">
+    Something went wrong sending your booking. Please try again, or contact directly at
+    <a href="mailto:bnw.carter@gmail.com">bnw.carter@gmail.com</a>.
+  </div>
+
+  <!-- Submit -->
+  <button class="btn-confirm" id="confirmBtn">Confirm Booking →</button>
+  <p class="footer-note">
+    By confirming, Carter will receive your booking request and be in touch shortly to finalise the date.<br>
+    No payment is taken at this stage.
+  </p>
+
 </div>
 
-<div class="button" id="confirmBtn">Confirm Booking</div>
-
 <script>
-const data = {
-    service:  localStorage.getItem("service")  || "",
-    package:  localStorage.getItem("package")  || "",
-    date:     localStorage.getItem("date")     || "",
-    time:     localStorage.getItem("time")     || "",
-    fname:    localStorage.getItem("fname")    || "",
-    lname:    localStorage.getItem("lname")    || "",
-    email:    localStorage.getItem("email")    || "",
-    phone:    localStorage.getItem("phone")    || "",
-    comments: localStorage.getItem("comments") || ""
-};
+/* ─── FORMSPREE SETUP ───────────────────────────────────────────────
+   1. Go to https://formspree.io and sign up (free)
+   2. Click "New Form", name it "Carter BNW Bookings"
+   3. Copy your endpoint — it looks like https://formspree.io/f/abcdefgh
+   4. Paste it below, replacing YOUR_FORMSPREE_ENDPOINT
+   ──────────────────────────────────────────────────────────────── */
+const FORMSPREE_ENDPOINT = 'YOUR_FORMSPREE_ENDPOINT';
 
-document.getElementById("service").textContent  = data.service;
-document.getElementById("package").textContent  = data.package;
-document.getElementById("date").textContent     = data.date;
-document.getElementById("time").textContent     = data.time;
-document.getElementById("fname").textContent    = data.fname;
-document.getElementById("lname").textContent    = data.lname;
-document.getElementById("email").textContent    = data.email;
-document.getElementById("phone").textContent    = data.phone;
-document.getElementById("comments").textContent = data.comments;
+/* ─── POPULATE REVIEW FIELDS ──────────────────────────────────── */
+const get = key => localStorage.getItem(key) || '';
 
-document.getElementById("confirmBtn").addEventListener("click", () => {
-    const form = document.createElement("form");
-    form.method = "POST";
-    form.action = "https://formsubmit.co/bnw.carter@gmail.com";
+document.getElementById('r-service').textContent  = get('service')  || '—';
+document.getElementById('r-package').textContent  = get('package')  || '—';
+document.getElementById('r-date').textContent     = get('date')     || '—';
+document.getElementById('r-time').textContent     = get('time')     || '—';
 
-    const addField = (name, value) => {
-        const input = document.createElement("input");
-        input.type = "hidden";
-        input.name = name;
-        input.value = value;
-        form.appendChild(input);
-    };
+const name = [get('fname'), get('lname')].filter(Boolean).join(' ');
+document.getElementById('r-name').textContent  = name  || '—';
+document.getElementById('r-email').textContent = get('email') || '—';
+document.getElementById('r-phone').textContent = get('phone') || '—';
 
-    addField("Service", data.service);
-    addField("Package", data.package);
-    addField("Date", data.date);
-    addField("Time", data.time);
-    addField("First Name", data.fname);
-    addField("Last Name", data.lname);
-    addField("Email", data.email);
-    addField("Phone", data.phone);
-    addField("Comments", data.comments);
+const comments = get('comments');
+if (comments) {
+  document.getElementById('r-comments').textContent = comments;
+  document.getElementById('r-comments-row').style.display = 'flex';
+}
 
-    // FormSubmit options
-    addField("_subject", "New Photography Booking");
-    addField("_cc", data.email); // send confirmation to client
-    // Replace with your real URL when deployed:
-    addField("_next", "https://carter-bnw.github.io/Service-Form/booking-confirmed.html");
+/* ─── CONFIRM & SUBMIT ────────────────────────────────────────── */
+document.getElementById('confirmBtn').addEventListener('click', async () => {
+  if (FORMSPREE_ENDPOINT === 'YOUR_FORMSPREE_ENDPOINT') {
+    alert('Formspree endpoint not set yet — see the comment inside booking-review.html.');
+    return;
+  }
 
+  const btn = document.getElementById('confirmBtn');
+  const errorMsg = document.getElementById('error-msg');
+  errorMsg.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
 
-    document.body.appendChild(form);
-    form.submit();
+  // Collect add-ons
+  const addons = [];
+  if (document.getElementById('addon-hour').checked)  addons.push('Additional Hour (+$350)');
+  if (document.getElementById('addon-rush').checked)  addons.push('Rush Delivery 48hrs (+$1,000)');
+
+  const payload = {
+    _subject: `New Booking: ${get('service')} — ${name || get('email')}`,
+    Service:   get('service'),
+    Package:   get('package'),
+    Date:      get('date'),
+    Time:      get('time'),
+    Name:      name,
+    Email:     get('email'),
+    Phone:     get('phone'),
+    'Add-Ons': addons.length ? addons.join(', ') : 'None',
+    Notes:     get('comments') || 'None',
+  };
+
+  try {
+    const res = await fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+
+    if (res.ok) {
+      window.location.href = 'booking-confirmed.html';
+    } else {
+      throw new Error('Server error');
+    }
+  } catch {
+    btn.disabled = false;
+    btn.textContent = 'Confirm Booking →';
+    errorMsg.style.display = 'block';
+  }
 });
 </script>
-
 </body>
 </html>
-
