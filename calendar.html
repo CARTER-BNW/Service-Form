@@ -4,259 +4,356 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Select Date & Time</title>
-
 <style>
-    body {
-        margin: 0;
-        font-family: "Inter", sans-serif;
-        background: #0d0d0d;
-        color: #f2f2f2;
-        text-align: center;
-    }
-    .back {
-        position: absolute;
-        left: 20px;
-        top: 20px;
-        color: #f2f2f2;
-        text-decoration: none;
-        font-size: 0.95rem;
-    }
-    header {
-        padding: 40px 20px 5px;
-        font-size: 2.2rem;
-        font-weight: 700;
-    }
-    .step {
-        font-size: 1rem;
-        color: #ccc;
-        margin-bottom: 20px;
-    }
-    .calendar-container {
-        width: 95%;
-        max-width: 700px;
-        margin: 30px auto;
-        background: #1a1a1a;
-        padding: 30px;
-        border-radius: 16px;
-        border: 1px solid #333;
-        animation: fadeIn 0.6s ease;
-        box-sizing: border-box;
-    }
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    .calendar-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-        font-size: 1.4rem;
-        font-weight: 600;
-    }
-    .calendar-header button {
-        background: #333;
-        border: none;
-        color: white;
-        padding: 10px 16px;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: 0.25s;
-    }
-    .calendar-header button:hover { background: #444; }
-    .calendar-grid {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        gap: 12px;
-        width: 100%;
-        box-sizing: border-box;
-    }
-    .day {
-        aspect-ratio: 1 / 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #0d0d0d;
-        border-radius: 10px;
-        border: 1px solid #333;
-        cursor: pointer;
-        transition: 0.25s;
-        font-size: 1.2rem;
-    }
-    .day:hover { background: #222; }
-    .day.selected {
-        background: #ffffff;
-        color: #000;
-        border-color: #fff;
-        font-weight: 700;
-    }
-    .time-container {
-        width: 95%;
-        max-width: 700px;
-        margin: 40px auto;
-        background: #1a1a1a;
-        padding: 30px;
-        border-radius: 16px;
-        border: 1px solid #333;
-        animation: fadeIn 0.6s ease;
-        box-sizing: border-box;
-    }
-    .time-container h2 {
-        margin-bottom: 20px;
-        font-size: 1.6rem;
-    }
-    .time-slot {
-        padding: 14px;
-        margin: 8px 0;
-        background: #0d0d0d;
-        border-radius: 8px;
-        border: 1px solid #333;
-        cursor: pointer;
-        transition: 0.25s;
-        font-size: 1.1rem;
-    }
-    .time-slot:hover { background: #222; }
-    .time-slot.selected {
-        background: #ffffff;
-        color: #000;
-        border-color: #fff;
-        font-weight: 700;
-    }
-    .button {
-        display: block;
-        margin: 40px auto;
-        padding: 18px;
-        width: 80%;
-        background: #333;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 12px;
-        font-size: 1.3rem;
-        transition: 0.25s;
-        cursor: pointer;
-    }
-    .button:hover { background: #444; }
-    @media (max-width: 700px) {
-        .calendar-container { padding: 20px; }
-        .calendar-grid { gap: 8px; }
-        .day { font-size: 1rem; border-radius: 8px; }
-        .time-container { padding: 20px; }
-        .time-slot { padding: 12px; font-size: 1rem; }
-    }
-    @media (min-width: 701px) {
-        .day { font-size: 1.5rem; padding: 22px; }
-        .calendar-header { font-size: 1.8rem; }
-        .time-container h2 { font-size: 2rem; }
-        .time-slot { font-size: 1.4rem; padding: 18px; }
-    }
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: #0d0d0d;
+  color: #f2f2f2;
+  text-align: center;
+}
+.back {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  color: #f2f2f2;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+.back:hover { color: #aaa; }
+header {
+  padding: 40px 20px 5px;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+.step {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+.calendar-container {
+  width: 95%;
+  max-width: 700px;
+  margin: 30px auto;
+  background: #1a1a1a;
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid #333;
+  animation: fadeIn 0.6s ease;
+  box-sizing: border-box;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+.calendar-header button {
+  background: #333;
+  border: none;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.calendar-header button:hover { background: #444; }
+
+/* Calendar grid — 7 columns */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Day-of-week header row */
+.day-header {
+  font-size: 0.72rem;
+  color: #666;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 0 8px;
+  text-align: center;
+}
+
+/* Individual day cells */
+.day {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0d0d0d;
+  border-radius: 10px;
+  border: 1px solid #2a2a2a;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 1rem;
+}
+.day:hover { background: #222; border-color: #444; }
+.day.selected {
+  background: #ffffff;
+  color: #000;
+  border-color: #fff;
+  font-weight: 700;
+}
+/* Past dates — greyed out, not clickable */
+.day.past {
+  color: #333;
+  border-color: #1a1a1a;
+  background: transparent;
+  cursor: default;
+  pointer-events: none;
+}
+/* Today — subtle highlight */
+.day.today {
+  border-color: #555;
+  color: #fff;
+}
+
+/* Time slots */
+.time-container {
+  width: 95%;
+  max-width: 700px;
+  margin: 32px auto;
+  background: #1a1a1a;
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid #333;
+  animation: fadeIn 0.6s ease;
+  box-sizing: border-box;
+}
+.time-container h2 {
+  margin-bottom: 16px;
+  font-size: 1.6rem;
+}
+.time-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.time-slot {
+  padding: 14px 8px;
+  background: #0d0d0d;
+  border-radius: 8px;
+  border: 1px solid #2a2a2a;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 1rem;
+  text-align: center;
+}
+.time-slot:hover { background: #222; border-color: #444; }
+.time-slot.selected {
+  background: #ffffff;
+  color: #000;
+  border-color: #fff;
+  font-weight: 700;
+}
+
+/* Next button */
+.button {
+  display: block;
+  margin: 32px auto 60px;
+  padding: 18px;
+  width: 80%;
+  max-width: 480px;
+  background: #333;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  transition: 0.25s;
+  cursor: pointer;
+  border: none;
+}
+.button:hover { background: #444; }
+.button.ready {
+  background: #fff;
+  color: #000;
+}
+.button.ready:hover { background: #e8e8e8; }
+
+@media (max-width: 500px) {
+  .calendar-container { padding: 16px; }
+  .day { font-size: 0.85rem; border-radius: 8px; }
+  .time-grid { grid-template-columns: repeat(3, 1fr); }
+  .time-slot { font-size: 0.9rem; padding: 12px 6px; }
+}
 </style>
 </head>
 <body>
 
 <a class="back" id="backLink" href="index.html">← Back</a>
 <header>Select Date & Time</header>
-<div class="step">Step 3 of 6 — Select Date & Time</div>
+<div class="step">Step 3 of 6 — Select Date &amp; Time</div>
 
 <div class="calendar-container">
-    <div class="calendar-header">
-        <button onclick="prevMonth()">‹</button>
-        <div id="monthYear"></div>
-        <button onclick="nextMonth()">›</button>
-    </div>
-    <div class="calendar-grid" id="calendarGrid"></div>
+  <div class="calendar-header">
+    <button onclick="prevMonth()">‹</button>
+    <div id="monthYear"></div>
+    <button onclick="nextMonth()">›</button>
+  </div>
+  <div class="calendar-grid" id="calendarGrid"></div>
 </div>
 
 <div class="time-container">
-    <h2>Select Start Time</h2>
-    <div id="timeSlots"></div>
+  <h2>Select Start Time</h2>
+  <div class="time-grid" id="timeSlots"></div>
 </div>
 
 <div class="button" id="nextBtn">Next: Contact Details</div>
 
 <script>
-    let currentDate = new Date();
-    let selectedDate = null;
-    let selectedTime = null;
+/* ── Back link: read service page stored by the package selector ── */
+document.getElementById('backLink').href =
+  localStorage.getItem('backUrl') || 'index.html';
 
-    function renderCalendar() {
-        const monthYear = document.getElementById("monthYear");
-        const grid = document.getElementById("calendarGrid");
+/* ── Calendar state ─────────────────────────────────────────────── */
+let currentDate = new Date();
+let selectedDate = null;
+let selectedTime = null;
 
-        const year = currentDate.getFullYear();
-        const month = currentDate.getMonth();
+/* Today with time zeroed — used to block past dates */
+const today = new Date();
+today.setHours(0, 0, 0, 0);
 
-        monthYear.textContent = currentDate.toLocaleString("default", { month: "long" }) + " " + year;
+function renderCalendar() {
+  const monthYearEl = document.getElementById('monthYear');
+  const grid        = document.getElementById('calendarGrid');
+  const year  = currentDate.getFullYear();
+  const month = currentDate.getMonth();
 
-        const firstDay = new Date(year, month, 1).getDay();
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
+  monthYearEl.textContent =
+    currentDate.toLocaleString('default', { month: 'long' }) + ' ' + year;
 
-        grid.innerHTML = "";
+  grid.innerHTML = '';
 
-        for (let i = 0; i < firstDay; i++) {
-            grid.innerHTML += `<div></div>`;
-        }
+  /* Day-of-week headers — Monday first (Australian standard) */
+  ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].forEach(d => {
+    const hdr = document.createElement('div');
+    hdr.className   = 'day-header';
+    hdr.textContent = d;
+    grid.appendChild(hdr);
+  });
 
-        for (let day = 1; day <= daysInMonth; day++) {
-            const div = document.createElement("div");
-            div.classList.add("day");
-            div.textContent = day;
+  /* Blank cells before the 1st — adjusted for Mon=0 */
+  const rawFirst = new Date(year, month, 1).getDay(); // 0=Sun
+  const firstDay  = rawFirst === 0 ? 6 : rawFirst - 1; // Mon=0 … Sun=6
+  for (let i = 0; i < firstDay; i++) {
+    grid.appendChild(document.createElement('div'));
+  }
 
-            div.onclick = () => {
-                document.querySelectorAll(".day").forEach(d => d.classList.remove("selected"));
-                div.classList.add("selected");
-                selectedDate = new Date(year, month, day);
-            };
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-            grid.appendChild(div);
-        }
+  for (let day = 1; day <= daysInMonth; day++) {
+    const cellDate = new Date(year, month, day);
+    const div = document.createElement('div');
+    div.classList.add('day');
+    div.textContent = day;
+
+    if (cellDate < today) {
+      /* Past date — greyed, unclickable */
+      div.classList.add('past');
+    } else {
+      if (
+        cellDate.getFullYear() === today.getFullYear() &&
+        cellDate.getMonth()   === today.getMonth()    &&
+        cellDate.getDate()    === today.getDate()
+      ) {
+        div.classList.add('today');
+      }
+      div.addEventListener('click', () => {
+        document.querySelectorAll('.day').forEach(d => d.classList.remove('selected'));
+        div.classList.add('selected');
+        selectedDate = cellDate;
+        updateButton();
+      });
     }
 
-    function prevMonth() {
-        currentDate.setMonth(currentDate.getMonth() - 1);
-        renderCalendar();
-    }
+    grid.appendChild(div);
+  }
+}
 
-    function nextMonth() {
-        currentDate.setMonth(currentDate.getMonth() + 1);
-        renderCalendar();
-    }
+function prevMonth() {
+  /* Don't go further back than the current month */
+  const now = new Date();
+  if (
+    currentDate.getFullYear() === now.getFullYear() &&
+    currentDate.getMonth()   === now.getMonth()
+  ) return;
+  currentDate.setMonth(currentDate.getMonth() - 1);
+  renderCalendar();
+}
 
-    function renderTimeSlots() {
-        const container = document.getElementById("timeSlots");
-        container.innerHTML = "";
+function nextMonth() {
+  currentDate.setMonth(currentDate.getMonth() + 1);
+  renderCalendar();
+}
 
-        for (let hour = 0; hour < 24; hour++) {
-            ["00", "30"].forEach(min => {
-                const time = `${hour.toString().padStart(2, "0")}:${min}`;
-                const div = document.createElement("div");
-                div.classList.add("time-slot");
-                div.textContent = time;
+/* ── Time slots — 7:00 to 20:00 in 30-minute steps ─────────────── */
+function renderTimeSlots() {
+  const container = document.getElementById('timeSlots');
+  container.innerHTML = '';
 
-                div.onclick = () => {
-                    document.querySelectorAll(".time-slot").forEach(t => t.classList.remove("selected"));
-                    div.classList.add("selected");
-                    selectedTime = time;
-                };
+  for (let hour = 7; hour <= 20; hour++) {
+    const minutes = hour === 20 ? ['00'] : ['00', '30'];
+    minutes.forEach(min => {
+      const h12   = hour > 12 ? hour - 12 : hour;
+      const ampm  = hour >= 12 ? 'PM' : 'AM';
+      const label = `${h12}:${min} ${ampm}`;
+      const value = `${hour.toString().padStart(2,'0')}:${min}`;
 
-                container.appendChild(div);
-            });
-        }
-    }
+      const div = document.createElement('div');
+      div.classList.add('time-slot');
+      div.textContent  = label;
+      div.dataset.time = value;
 
-    document.getElementById("nextBtn").addEventListener("click", () => {
-        if (selectedDate && selectedTime) {
-            const d = selectedDate;
-            const dateString = d.toLocaleDateString();
-            localStorage.setItem("date", dateString);
-            localStorage.setItem("time", selectedTime);
-            window.location.href = "contact.html";
-        } else {
-            alert("Please select a date and time.");
-        }
+      div.addEventListener('click', () => {
+        document.querySelectorAll('.time-slot').forEach(t => t.classList.remove('selected'));
+        div.classList.add('selected');
+        selectedTime = value;
+        updateButton();
+      });
+
+      container.appendChild(div);
     });
+  }
+}
 
-    renderCalendar();
-    renderTimeSlots();
+/* ── Button state ───────────────────────────────────────────────── */
+function updateButton() {
+  const btn = document.getElementById('nextBtn');
+  if (selectedDate && selectedTime) {
+    btn.classList.add('ready');
+  } else {
+    btn.classList.remove('ready');
+  }
+}
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+  if (!selectedDate || !selectedTime) {
+    alert('Please select both a date and a start time.');
+    return;
+  }
+  localStorage.setItem('date', selectedDate.toLocaleDateString('en-AU', {
+    weekday: 'short', day: 'numeric', month: 'long', year: 'numeric'
+  }));
+  localStorage.setItem('time', selectedTime);
+  window.location.href = 'contact.html';
+});
+
+/* ── Init ───────────────────────────────────────────────────────── */
+renderCalendar();
+renderTimeSlots();
 </script>
 
 </body>
