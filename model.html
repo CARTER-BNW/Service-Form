@@ -3,53 +3,127 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Model Packages</title>
-
+<title>Model Shoot Packages — Carter BNW</title>
 <style>
-    body { margin:0; font-family:"Inter",sans-serif; background:#0d0d0d; color:#fff; text-align:center; }
-    .back { position:absolute; left:20px; top:20px; color:#fff; text-decoration:none; font-size:0.95rem; }
-    header { padding:40px 20px 5px; font-size:2.2rem; font-weight:700; }
-    .step { font-size:1rem; color:#ccc; margin-bottom:20px; }
-    .grid { max-width:900px; margin:40px auto; padding:0 20px; display:grid; gap:30px; }
-    .pkg { background:#1a1a1a; padding:30px; border-radius:16px; border:1px solid #333; cursor:pointer; transition:0.25s; }
-    .pkg:hover { background:#222; }
-    .pkg-title { font-size:1.6rem; font-weight:700; margin-bottom:10px; }
-    .pkg-desc { font-size:1rem; color:#ccc; margin-bottom:20px; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Inter", sans-serif; background: #0d0d0d; color: #f2f2f2; min-height: 100vh; text-align: center; }
+.back { position: absolute; left: 20px; top: 22px; color: #aaa; text-decoration: none; font-size: 0.9rem; letter-spacing: 0.04em; transition: color 0.2s; }
+.back:hover { color: #fff; }
+header { padding: 52px 20px 6px; font-size: 2.2rem; font-weight: 700; }
+.step { font-size: 0.95rem; color: #888; margin: 10px 0 40px; }
+.grid { max-width: 860px; margin: 0 auto; padding: 0 20px 80px; display: grid; gap: 20px; }
+.pkg {
+  background: #1a1a1a; padding: 32px 36px 32px 32px;
+  border-radius: 16px; border: 1px solid #2a2a2a;
+  cursor: pointer; transition: border-color 0.25s, background 0.25s;
+  text-align: left; position: relative;
+  display: grid; grid-template-columns: 1fr auto; gap: 0 24px; align-items: start;
+}
+.pkg:hover { background: #1e1e1e; border-color: #555; }
+.pkg-left { display: flex; flex-direction: column; }
+.pkg-badge { font-size: 0.72rem; color: #888; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 8px; }
+.pkg-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 18px; }
+.pkg-features { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.pkg-features li { font-size: 0.88rem; color: #bbb; display: flex; align-items: center; gap: 9px; }
+.pkg-features li::before { content: "—"; color: #555; flex-shrink: 0; }
+.pkg-right { text-align: right; padding-top: 4px; }
+.pkg-price { font-size: 2rem; font-weight: 700; white-space: nowrap; }
+.pkg-arrow { display: block; font-size: 1.4rem; color: #444; margin-top: 12px; transition: color 0.2s, transform 0.2s; }
+.pkg:hover .pkg-arrow { color: #fff; transform: translateX(4px); }
+@media (max-width: 600px) {
+  .pkg { grid-template-columns: 1fr; }
+  .pkg-right { text-align: left; padding-top: 16px; }
+  .pkg-arrow { display: none; }
+}
 </style>
 </head>
-
 <body>
 
 <a class="back" href="index.html">← Back</a>
-<header>Model Packages</header>
-<div class="step">Step 2 of 6 — Select Package</div>
+<header>Model Shoot Packages</header>
+<p class="step">Step 2 of 6 — Select Package</p>
 
 <div class="grid">
-    <div class="pkg" data-package="Model Quick Shoot">
-        <div class="pkg-title">Quick Shoot</div>
-        <div class="pkg-desc">30 minutes • 20 edited photos</div>
-    </div>
 
-    <div class="pkg" data-package="Model Standard Shoot">
-        <div class="pkg-title">Standard Shoot</div>
-        <div class="pkg-desc">1 hour • 40 edited photos</div>
+  <div class="pkg" data-package="Model Shoot — Quick — $150">
+    <div class="pkg-left">
+      <span class="pkg-badge">Pack № 1</span>
+      <div class="pkg-title">Quick</div>
+      <ul class="pkg-features">
+        <li>30-minute session</li>
+        <li>20+ edited images</li>
+        <li>Artistic retouching</li>
+        <li>Private online gallery</li>
+      </ul>
     </div>
+    <div class="pkg-right">
+      <div class="pkg-price">$150</div>
+      <span class="pkg-arrow">›</span>
+    </div>
+  </div>
 
-    <div class="pkg" data-package="Model Creative Shoot">
-        <div class="pkg-title">Creative Shoot</div>
-        <div class="pkg-desc">2 hours • 80 edited photos</div>
+  <div class="pkg" data-package="Model Shoot — Standard — $300">
+    <div class="pkg-left">
+      <span class="pkg-badge">Pack № 2</span>
+      <div class="pkg-title">Standard</div>
+      <ul class="pkg-features">
+        <li>45-minute session</li>
+        <li>35+ edited images</li>
+        <li>Natural retouching and colour grading</li>
+        <li>Private online gallery</li>
+      </ul>
     </div>
+    <div class="pkg-right">
+      <div class="pkg-price">$300</div>
+      <span class="pkg-arrow">›</span>
+    </div>
+  </div>
+
+  <div class="pkg" data-package="Model Shoot — Creative — $450">
+    <div class="pkg-left">
+      <span class="pkg-badge">Pack № 3</span>
+      <div class="pkg-title">Creative</div>
+      <ul class="pkg-features">
+        <li>1-hour session</li>
+        <li>60+ edited images</li>
+        <li>Art-focused retouching</li>
+        <li>Private online gallery</li>
+      </ul>
+    </div>
+    <div class="pkg-right">
+      <div class="pkg-price">$450</div>
+      <span class="pkg-arrow">›</span>
+    </div>
+  </div>
+
+  <div class="pkg" data-package="Model Shoot — Full — $700">
+    <div class="pkg-left">
+      <span class="pkg-badge">Pack № 4</span>
+      <div class="pkg-title">Full</div>
+      <ul class="pkg-features">
+        <li>2-hour session</li>
+        <li>120+ edited images</li>
+        <li>Creative direction and varied locations</li>
+        <li>Private online gallery</li>
+      </ul>
+    </div>
+    <div class="pkg-right">
+      <div class="pkg-price">$700</div>
+      <span class="pkg-arrow">›</span>
+    </div>
+  </div>
+
 </div>
 
 <script>
 document.querySelectorAll('.pkg').forEach(pkg => {
-    pkg.addEventListener('click', () => {
-        localStorage.setItem('service', 'Model Shoot');
-        localStorage.setItem('package', pkg.getAttribute('data-package'));
-        window.location.href = "calendar.html";
-    });
+  pkg.addEventListener('click', () => {
+    localStorage.setItem('service', 'Model Shoot');
+    localStorage.setItem('package', pkg.getAttribute('data-package'));
+    localStorage.setItem('backUrl', 'model.html');
+    window.location.href = 'calendar.html';
+  });
 });
 </script>
-
 </body>
 </html>
