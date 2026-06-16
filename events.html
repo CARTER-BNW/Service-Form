@@ -3,310 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Event Packages</title>
-
+<title>Event Packages — Carter BNW</title>
 <style>
-    body {
-        margin:0;
-        font-family:"Inter",sans-serif;
-        background:#0d0d0d;
-        color:#fff;
-        text-align:center;
-    }
-
-    .back {
-        position:absolute;
-        left:20px;
-        top:20px;
-        color:#fff;
-        text-decoration:none;
-        font-size:0.95rem;
-    }
-
-    header {
-        padding:40px 20px 5px;
-        font-size:2.2rem;
-        font-weight:700;
-    }
-
-    .step {
-        font-size:1rem;
-        color:#ccc;
-        margin-bottom:20px;
-    }
-
-    .grid {
-        max-width:900px;
-        margin:40px auto;
-        padding:0 20px;
-        display:grid;
-        gap:30px;
-    }
-
-    /* PACKAGE CARD */
-    .pkg {
-        position:relative;
-        border-radius:16px;
-        overflow:hidden;
-        cursor:pointer;
-        border:1px solid #333;
-        transition:0.3s ease;
-        text-align:left;
-        height:260px;
-        display:flex;
-        flex-direction:column;
-        justify-content:flex-end;
-    }
-
-    .pkg:hover {
-        transform:scale(1.03);
-        border-color:#555;
-    }
-
-    /* BACKGROUND IMAGES */
-    .pkg1 { background:url('eventpack1.jpg') center 42% /cover no-repeat; }
-    .pkg2 { background:url('eventpack2.jpg') center 32% /cover no-repeat; }
-    .pkg3 { background:url('eventpack3.jpg') center 60% /cover no-repeat; }
-    .pkg4 { background:url('eventpack4.jpg') center/cover no-repeat; }
-
-    /* DARK OVERLAY */
-    .overlay {
-        position:absolute;
-        inset:0;
-        background:rgba(0,0,0,0.55);
-        transition:0.3s ease;
-    }
-
-    .pkg:hover .overlay {
-        background:rgba(0,0,0,0.35);
-    }
-
-    /* CONTENT */
-    .pkg-content {
-        position:relative;
-        padding:25px;
-        z-index:2;
-    }
-
-    .pkg-header {
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        margin-bottom:10px;
-    }
-
-    .pkg-title {
-        font-size:1.5rem;
-        font-weight:700;
-    }
-
-    .pkg-price {
-        font-size:1.3rem;
-        font-weight:700;
-        color:#f2f2f2;
-    }
-
-    .pkg-desc {
-        font-size:1rem;
-        color:#ddd;
-        margin-bottom:10px;
-        line-height:1.5;
-    }
-
-    ul {
-        margin:0;
-        padding-left:20px;
-        color:#ccc;
-        line-height:1.5;
-        font-size:0.95rem;
-    }
-
-    li { margin-bottom:4px; }
-
-    /* MOST POPULAR BADGE */
-    .badge {
-        position:absolute;
-        top:12px;
-        right:12px;
-        background:#ffcc00;
-        color:#000;
-        font-size:0.75rem;
-        font-weight:700;
-        padding:6px 10px;
-        border-radius:8px;
-        z-index:3;
-        box-shadow:0 0 10px rgba(255,255,0,0.4);
-    }
-
-    /* PHOTO GROUPS */
-    .group-title {
-        font-size:1.6rem;
-        font-weight:700;
-        margin:60px auto 20px;
-        text-align:left;
-        max-width:900px;
-        padding:0 20px;
-    }
-
-    .photo-grid {
-        max-width:900px;
-        margin:0 auto 40px;
-        padding:0 20px;
-        display:grid;
-        grid-template-columns:repeat(4, 1fr);
-        gap:20px;
-    }
-
-    .photo-grid img {
-        width:100%;
-        height:200px;
-        object-fit:cover;
-        border-radius:12px;
-        border:1px solid #333;
-    }
-
-    @media (max-width:700px) {
-        .pkg { height:auto; }
-        .pkg-content { padding:20px; }
-
-        .photo-grid {
-            grid-template-columns:repeat(2, 1fr);
-        }
-
-        .photo-grid img {
-            height:160px;
-        }
-    }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Inter", sans-serif; background: #0d0d0d; color: #f2f2f2; min-height: 100vh; text-align: center; }
+.back { position: absolute; left: 20px; top: 22px; color: #aaa; text-decoration: none; font-size: 0.9rem; letter-spacing: 0.04em; transition: color 0.2s; }
+.back:hover { color: #fff; }
+header { padding: 52px 20px 6px; font-size: 2.2rem; font-weight: 700; }
+.step { font-size: 0.95rem; color: #888; margin: 10px 0 40px; }
+.grid { max-width: 860px; margin: 0 auto; padding: 0 20px 80px; display: grid; gap: 20px; }
+.pkg {
+  background: #1a1a1a; padding: 32px 36px 32px 32px;
+  border-radius: 16px; border: 1px solid #2a2a2a;
+  cursor: pointer; transition: border-color 0.25s, background 0.25s;
+  text-align: left; position: relative;
+  display: grid; grid-template-columns: 1fr auto; gap: 0 24px; align-items: start;
+}
+.pkg:hover { background: #1e1e1e; border-color: #555; }
+.pkg-left { display: flex; flex-direction: column; }
+.pkg-badge { font-size: 0.72rem; color: #888; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 8px; }
+.pkg-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 4px; }
+.pkg-desc { font-size: 0.9rem; color: #999; margin-bottom: 18px; line-height: 1.5; }
+.pkg-features { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.pkg-features li { font-size: 0.88rem; color: #bbb; display: flex; align-items: center; gap: 9px; }
+.pkg-features li::before { content: "—"; color: #555; flex-shrink: 0; }
+.pkg-right { text-align: right; padding-top: 4px; }
+.pkg-price { font-size: 2rem; font-weight: 700; white-space: nowrap; }
+.pkg-arrow { display: block; font-size: 1.4rem; color: #444; margin-top: 12px; transition: color 0.2s, transform 0.2s; }
+.pkg:hover .pkg-arrow { color: #fff; transform: translateX(4px); }
+@media (max-width: 600px) {
+  .pkg { grid-template-columns: 1fr; }
+  .pkg-right { text-align: left; padding-top: 16px; }
+  .pkg-arrow { display: none; }
+}
 </style>
 </head>
-
 <body>
 
 <a class="back" href="index.html">← Back</a>
-
 <header>Event Packages</header>
-<div class="step">Step 2 of 6 — Select Package</div>
+<p class="step">Step 2 of 6 — Select Package</p>
 
 <div class="grid">
 
-    <!-- EVENT PACK 1 -->
-    <div class="pkg pkg1" data-package="Event Pack 1 — $220">
-        <div class="overlay"></div>
-        <div class="pkg-content">
-            <div class="pkg-header">
-                <div class="pkg-title">EVENT PACK №1</div>
-                <div class="pkg-price">$220</div>
-            </div>
-
-            <div class="pkg-desc">A streamlined option for quick coverage with beautiful, natural edits.</div>
-            <ul>
-                <li>1 hour of coverage</li>
-                <li>50+ professionally edited images</li>
-                <li>Natural colour and black & white versions</li>
-                <li>Private online gallery</li>
-            </ul>
-        </div>
+  <div class="pkg" data-package="Event Pack №1 — $220">
+    <div class="pkg-left">
+      <span class="pkg-badge">Event Pack № 1</span>
+      <div class="pkg-title">Quick Coverage</div>
+      <div class="pkg-desc">A streamlined option for quick coverage with beautiful, natural edits.</div>
+      <ul class="pkg-features">
+        <li>1 hour of coverage</li>
+        <li>50+ professionally edited images</li>
+        <li>Natural colour and black &amp; white versions</li>
+        <li>Private online gallery</li>
+      </ul>
     </div>
-
-    <!-- EVENT PACK 2 (MOST POPULAR) -->
-    <div class="pkg pkg2" data-package="Event Pack 2 — $650">
-        <div class="badge">MOST POPULAR</div>
-        <div class="overlay"></div>
-
-        <div class="pkg-content">
-            <div class="pkg-header">
-                <div class="pkg-title">EVENT PACK №2</div>
-                <div class="pkg-price">$650</div>
-            </div>
-
-            <div class="pkg-desc">Designed to capture the full atmosphere and emotion of your event.</div>
-            <ul>
-                <li>3 hours of coverage</li>
-                <li>150+ edited images</li>
-                <li>Documentary‑style editing</li>
-                <li>Private online gallery</li>
-            </ul>
-        </div>
+    <div class="pkg-right">
+      <div class="pkg-price">$220</div>
+      <span class="pkg-arrow">›</span>
     </div>
+  </div>
 
-    <!-- EVENT PACK 3 -->
-    <div class="pkg pkg3" data-package="Event Pack 3 — $850">
-        <div class="overlay"></div>
-
-        <div class="pkg-content">
-            <div class="pkg-header">
-                <div class="pkg-title">EVENT PACK №3</div>
-                <div class="pkg-price">$850</div>
-            </div>
-
-            <div class="pkg-desc">For events that deserve full storytelling from start to finish.</div>
-            <ul>
-                <li>4 hours of coverage</li>
-                <li>220+ edited images</li>
-                <li>Complete event story coverage</li>
-                <li>Private online gallery</li>
-            </ul>
-        </div>
+  <div class="pkg" data-package="Event Pack №2 — $650">
+    <div class="pkg-left">
+      <span class="pkg-badge">Event Pack № 2</span>
+      <div class="pkg-title">Full Atmosphere</div>
+      <div class="pkg-desc">Designed to capture the full atmosphere and emotion of your event.</div>
+      <ul class="pkg-features">
+        <li>3 hours of coverage</li>
+        <li>150+ edited images</li>
+        <li>Documentary-style editing</li>
+        <li>Private online gallery</li>
+      </ul>
     </div>
-
-    <!-- EVENT PACK 4 — CUSTOM QUOTE -->
-    <div class="pkg pkg4" data-package="Custom Event Quote">
-        <div class="overlay"></div>
-
-        <div class="pkg-content">
-            <div class="pkg-header">
-                <div class="pkg-title">CUSTOM EVENT QUOTE</div>
-                <div class="pkg-price">Custom</div>
-            </div>
-
-            <div class="pkg-desc">Perfect for multi‑day events, corporate functions, or unique coverage needs.</div>
-            <ul>
-                <li>Flexible hours</li>
-                <li>Tailored coverage plan</li>
-                <li>Unlimited edited images</li>
-                <li>Private online gallery</li>
-            </ul>
-        </div>
+    <div class="pkg-right">
+      <div class="pkg-price">$650</div>
+      <span class="pkg-arrow">›</span>
     </div>
+  </div>
 
-</div>
+  <div class="pkg" data-package="Event Pack №3 — $850">
+    <div class="pkg-left">
+      <span class="pkg-badge">Event Pack № 3</span>
+      <div class="pkg-title">Complete Story</div>
+      <div class="pkg-desc">For events that deserve full storytelling from start to finish.</div>
+      <ul class="pkg-features">
+        <li>4 hours of coverage</li>
+        <li>220+ edited images</li>
+        <li>Complete event story coverage</li>
+        <li>Private online gallery</li>
+      </ul>
+    </div>
+    <div class="pkg-right">
+      <div class="pkg-price">$850</div>
+      <span class="pkg-arrow">›</span>
+    </div>
+  </div>
 
-<!-- PHOTO GROUP 1 -->
-<div class="group-title">Corporate Events</div>
-<div class="photo-grid">
-    <img src="eventgroup1-1.jpg">
-    <img src="eventgroup1-2.jpg">
-    <img src="eventgroup1-3.jpg">
-    <img src="eventgroup1-4.jpg">
-</div>
-
-<!-- PHOTO GROUP 2 -->
-<div class="group-title">Private Functions</div>
-<div class="photo-grid">
-    <img src="eventgroup2-1.jpg">
-    <img src="eventgroup2-2.jpg">
-    <img src="eventgroup2-3.jpg">
-    <img src="eventgroup2-4.jpg">
-</div>
-
-<!-- PHOTO GROUP 3 -->
-<div class="group-title">Live Performances</div>
-<div class="photo-grid">
-    <img src="eventgroup3-1.jpg">
-    <img src="eventgroup3-2.jpg">
-    <img src="eventgroup3-3.jpg">
-    <img src="eventgroup3-4.jpg">
 </div>
 
 <script>
 document.querySelectorAll('.pkg').forEach(pkg => {
-    pkg.addEventListener('click', () => {
-        localStorage.setItem('service', 'Events');
-        localStorage.setItem('package', pkg.getAttribute('data-package'));
-        window.location.href = "calendar.html";
-    });
+  pkg.addEventListener('click', () => {
+    localStorage.setItem('service', 'Events');
+    localStorage.setItem('package', pkg.getAttribute('data-package'));
+    localStorage.setItem('backUrl', 'events.html');
+    window.location.href = 'calendar.html';
+  });
 });
 </script>
-
 </body>
 </html>
