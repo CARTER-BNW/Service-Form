@@ -3,53 +3,118 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wedding Packages</title>
-
+<title>Wedding Packages — Carter BNW</title>
 <style>
-    body { margin:0; font-family:"Inter",sans-serif; background:#0d0d0d; color:#fff; text-align:center; }
-    .back { position:absolute; left:20px; top:20px; color:#fff; text-decoration:none; font-size:0.95rem; }
-    header { padding:40px 20px 5px; font-size:2.2rem; font-weight:700; }
-    .step { font-size:1rem; color:#ccc; margin-bottom:20px; }
-    .grid { max-width:900px; margin:40px auto; padding:0 20px; display:grid; gap:30px; }
-    .pkg { background:#1a1a1a; padding:30px; border-radius:16px; border:1px solid #333; cursor:pointer; transition:0.25s; }
-    .pkg:hover { background:#222; }
-    .pkg-title { font-size:1.6rem; font-weight:700; margin-bottom:10px; }
-    .pkg-desc { font-size:1rem; color:#ccc; margin-bottom:20px; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Inter", sans-serif; background: #0d0d0d; color: #f2f2f2; min-height: 100vh; text-align: center; }
+.back { position: absolute; left: 20px; top: 22px; color: #aaa; text-decoration: none; font-size: 0.9rem; letter-spacing: 0.04em; transition: color 0.2s; }
+.back:hover { color: #fff; }
+header { padding: 52px 20px 6px; font-size: 2.2rem; font-weight: 700; }
+.step { font-size: 0.95rem; color: #888; margin: 10px 0 40px; }
+.grid { max-width: 860px; margin: 0 auto; padding: 0 20px 80px; display: grid; gap: 20px; }
+.pkg {
+  background: #1a1a1a; padding: 32px 36px 32px 32px;
+  border-radius: 16px; border: 1px solid #2a2a2a;
+  cursor: pointer; transition: border-color 0.25s, background 0.25s;
+  text-align: left; position: relative;
+  display: grid; grid-template-columns: 1fr auto; gap: 0 24px; align-items: start;
+}
+.pkg:hover { background: #1e1e1e; border-color: #555; }
+.pkg-left { display: flex; flex-direction: column; }
+.pkg-badge { font-size: 0.72rem; color: #888; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 8px; }
+.pkg-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 4px; }
+.pkg-desc { font-size: 0.9rem; color: #999; margin-bottom: 18px; line-height: 1.5; }
+.pkg-features { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.pkg-features li { font-size: 0.88rem; color: #bbb; display: flex; align-items: center; gap: 9px; }
+.pkg-features li::before { content: "—"; color: #555; flex-shrink: 0; }
+.pkg-right { text-align: right; padding-top: 4px; }
+.pkg-price { font-size: 2rem; font-weight: 700; white-space: nowrap; }
+.pkg-arrow { display: block; font-size: 1.4rem; color: #444; margin-top: 12px; transition: color 0.2s, transform 0.2s; }
+.pkg:hover .pkg-arrow { color: #fff; transform: translateX(4px); }
+@media (max-width: 600px) {
+  .pkg { grid-template-columns: 1fr; }
+  .pkg-right { text-align: left; padding-top: 16px; }
+  .pkg-arrow { display: none; }
+}
 </style>
 </head>
-
 <body>
 
 <a class="back" href="index.html">← Back</a>
 <header>Wedding Packages</header>
-<div class="step">Step 2 of 6 — Select Package</div>
+<p class="step">Step 2 of 6 — Select Package</p>
 
 <div class="grid">
-    <div class="pkg" data-package="Wedding Basic">
-        <div class="pkg-title">Wedding Basic</div>
-        <div class="pkg-desc">4 hours • 200+ edited photos</div>
-    </div>
 
-    <div class="pkg" data-package="Wedding Half‑Day">
-        <div class="pkg-title">Wedding Half‑Day</div>
-        <div class="pkg-desc">6 hours • 400+ edited photos</div>
+  <div class="pkg" data-package="Pack №1 Basic — $2,800">
+    <div class="pkg-left">
+      <span class="pkg-badge">Pack № 1</span>
+      <div class="pkg-title">Basic</div>
+      <div class="pkg-desc">Perfect for intimate weddings or shorter celebrations.</div>
+      <ul class="pkg-features">
+        <li>4 hours of coverage</li>
+        <li>200+ professionally edited images</li>
+        <li>Natural colour and black &amp; white edits</li>
+        <li>Private online gallery</li>
+      </ul>
     </div>
+    <div class="pkg-right">
+      <div class="pkg-price">$2,800</div>
+      <span class="pkg-arrow">›</span>
+    </div>
+  </div>
 
-    <div class="pkg" data-package="Wedding Full‑Day">
-        <div class="pkg-title">Wedding Full‑Day</div>
-        <div class="pkg-desc">12 hours • 700+ edited photos</div>
+  <div class="pkg" data-package="Pack №2 Half Day — $3,400">
+    <div class="pkg-left">
+      <span class="pkg-badge">Pack № 2</span>
+      <div class="pkg-title">Half Day</div>
+      <div class="pkg-desc">A balanced package capturing preparation, ceremony, and key moments.</div>
+      <ul class="pkg-features">
+        <li>Pre-meeting for planning</li>
+        <li>Attendance at your practice wedding</li>
+        <li>6 hours of coverage</li>
+        <li>500+ edited images</li>
+        <li>Documentary-style editing</li>
+        <li>Private online gallery</li>
+      </ul>
     </div>
+    <div class="pkg-right">
+      <div class="pkg-price">$3,400</div>
+      <span class="pkg-arrow">›</span>
+    </div>
+  </div>
+
+  <div class="pkg" data-package="Pack №3 Full Day — $6,000">
+    <div class="pkg-left">
+      <span class="pkg-badge">Pack № 3</span>
+      <div class="pkg-title">Full Day</div>
+      <div class="pkg-desc">Complete wedding storytelling from morning preparations to the final moment.</div>
+      <ul class="pkg-features">
+        <li>Pre-meeting for planning</li>
+        <li>Attendance at your practice wedding</li>
+        <li>12 hours of full-day coverage</li>
+        <li>800+ edited images</li>
+        <li>Full event story</li>
+        <li>Private online gallery</li>
+      </ul>
+    </div>
+    <div class="pkg-right">
+      <div class="pkg-price">$6,000</div>
+      <span class="pkg-arrow">›</span>
+    </div>
+  </div>
+
 </div>
 
 <script>
 document.querySelectorAll('.pkg').forEach(pkg => {
-    pkg.addEventListener('click', () => {
-        localStorage.setItem('service', 'Wedding');
-        localStorage.setItem('package', pkg.getAttribute('data-package'));
-        window.location.href = "calendar.html";
-    });
+  pkg.addEventListener('click', () => {
+    localStorage.setItem('service', 'Wedding');
+    localStorage.setItem('package', pkg.getAttribute('data-package'));
+    localStorage.setItem('backUrl', 'wedding.html');
+    window.location.href = 'calendar.html';
+  });
 });
 </script>
-
 </body>
 </html>
