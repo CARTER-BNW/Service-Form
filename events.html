@@ -36,6 +36,26 @@ header { padding: 52px 20px 6px; font-size: 2.2rem; font-weight: 700; }
   .pkg-right { text-align: left; padding-top: 16px; }
   .pkg-arrow { display: none; }
 }
+/* Extra hours card */
+.extra {
+  background: #141414; border: 1px dashed #333; border-radius: 16px;
+  padding: 26px 32px; text-align: left;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 20px; flex-wrap: wrap;
+}
+.extra-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 4px; }
+.extra-desc { font-size: 0.85rem; color: #999; line-height: 1.5; }
+.extra-controls { display: flex; align-items: center; gap: 14px; }
+.hr-btn {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: none; border: 1px solid #3a3a3a; color: #f2f2f2;
+  font-size: 1.2rem; line-height: 1; cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.hr-btn:hover:not(:disabled) { border-color: #888; background: #1e1e1e; }
+.hr-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.hr-count { font-size: 1.2rem; font-weight: 700; min-width: 24px; text-align: center; }
+.hr-total { font-size: 0.9rem; color: #999; min-width: 70px; text-align: right; }
 </style>
 </head>
 <body>
@@ -100,6 +120,20 @@ header { padding: 52px 20px 6px; font-size: 2.2rem; font-weight: 700; }
     </div>
   </div>
 
+  <!-- Extra hours -->
+  <div class="extra">
+    <div>
+      <div class="extra-title">Extra Hours</div>
+      <div class="extra-desc">Need more time? Add extra hours of coverage — $350 per hour.<br>You can still change this on the review page.</div>
+    </div>
+    <div class="extra-controls">
+      <button class="hr-btn" id="hrMinus" aria-label="Remove an hour">−</button>
+      <span class="hr-count" id="hrCount">0</span>
+      <button class="hr-btn" id="hrPlus" aria-label="Add an hour">+</button>
+      <span class="hr-total" id="hrTotal"></span>
+    </div>
+  </div>
+
 </div>
 
 <script>
@@ -111,6 +145,29 @@ document.querySelectorAll('.pkg').forEach(pkg => {
     window.location.href = 'calendar.html';
   });
 });
+
+/* Extra hours stepper */
+const HOURLY_RATE = 350;
+const MAX_HOURS   = 12;
+const hrCount = document.getElementById('hrCount');
+const hrTotal = document.getElementById('hrTotal');
+const hrMinus = document.getElementById('hrMinus');
+const hrPlus  = document.getElementById('hrPlus');
+
+let extraHours = parseInt(localStorage.getItem('extraHours'), 10) || 0;
+if (extraHours < 0) extraHours = 0;
+if (extraHours > MAX_HOURS) extraHours = MAX_HOURS;
+
+function renderHours() {
+  hrCount.textContent = extraHours;
+  hrTotal.textContent = extraHours > 0 ? '+$' + (extraHours * HOURLY_RATE).toLocaleString() : '';
+  hrMinus.disabled = extraHours === 0;
+  hrPlus.disabled  = extraHours === MAX_HOURS;
+  localStorage.setItem('extraHours', extraHours);
+}
+hrMinus.addEventListener('click', () => { if (extraHours > 0) { extraHours--; renderHours(); } });
+hrPlus.addEventListener('click',  () => { if (extraHours < MAX_HOURS) { extraHours++; renderHours(); } });
+renderHours();
 </script>
 </body>
 </html>
