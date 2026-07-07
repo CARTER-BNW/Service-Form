@@ -119,6 +119,23 @@ header { padding: 52px 20px 6px; font-size: 2rem; font-weight: 700; }
 .addon-name  { font-size: 0.92rem; color: #e0e0e0; }
 .addon-price { font-size: 0.8rem; color: #666; margin-top: 2px; }
 
+/* Extra hours stepper */
+.addon-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 15px 20px; border-bottom: 1px solid #1a1a1a;
+}
+.hr-stepper { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.hr-btn {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: none; border: 1px solid #3a3a3a; color: #f2f2f2;
+  font-size: 1.1rem; line-height: 1; cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.hr-btn:hover:not(:disabled) { border-color: #888; background: #1e1e1e; }
+.hr-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.hr-count { font-size: 1.05rem; font-weight: 700; min-width: 22px; text-align: center; }
+.hr-total { font-size: 0.85rem; color: #999; min-width: 64px; text-align: right; }
+
 /* ── ERROR ───────────────────────────────────────────────── */
 .error-box {
   background: #1e1010; border: 1px solid #4a1f1f;
@@ -235,13 +252,18 @@ header { padding: 52px 20px 6px; font-size: 2rem; font-weight: 700; }
   <div class="addon-card">
     <div class="addon-head">Optional Add-Ons</div>
     <p class="addon-note">Add extras to your booking — final pricing confirmed with Carter.</p>
-    <label class="addon-label">
-      <input type="checkbox" id="addon-hour">
+    <div class="addon-row">
       <div class="addon-text-wrap">
-        <div class="addon-name">Additional Hour</div>
-        <div class="addon-price">+$350</div>
+        <div class="addon-name">Additional Hours</div>
+        <div class="addon-price">$350 per hour</div>
       </div>
-    </label>
+      <div class="hr-stepper">
+        <button class="hr-btn" id="hrMinus" aria-label="Remove an hour">−</button>
+        <span class="hr-count" id="hrCount">0</span>
+        <button class="hr-btn" id="hrPlus" aria-label="Add an hour">+</button>
+      </div>
+      <span class="hr-total" id="hrTotal"></span>
+    </div>
     <label class="addon-label">
       <input type="checkbox" id="addon-rush">
       <div class="addon-text-wrap">
@@ -327,6 +349,31 @@ editToggle.addEventListener('click', () => {
   }
 });
 
+/* ── EXTRA HOURS STEPPER ──────────────────────────────────────── */
+const HOURLY_RATE = 350;
+const MAX_HOURS   = 12;
+const hrCount = document.getElementById('hrCount');
+const hrTotal = document.getElementById('hrTotal');
+const hrMinus = document.getElementById('hrMinus');
+const hrPlus  = document.getElementById('hrPlus');
+
+let extraHours = parseInt(get('extraHours'), 10) || 0;
+if (extraHours < 0) extraHours = 0;
+if (extraHours > MAX_HOURS) extraHours = MAX_HOURS;
+
+function renderHours() {
+  hrCount.textContent = extraHours;
+  hrTotal.textContent = extraHours > 0
+    ? '+$' + (extraHours * HOURLY_RATE).toLocaleString()
+    : '';
+  hrMinus.disabled = extraHours === 0;
+  hrPlus.disabled  = extraHours === MAX_HOURS;
+  set('extraHours', extraHours);
+}
+hrMinus.addEventListener('click', () => { if (extraHours > 0) { extraHours--; renderHours(); } });
+hrPlus.addEventListener('click',  () => { if (extraHours < MAX_HOURS) { extraHours++; renderHours(); } });
+renderHours();
+
 document.getElementById('saveDetails').addEventListener('click', () => {
   set('fname',    document.getElementById('e-fname').value.trim());
   set('lname',    document.getElementById('e-lname').value.trim());
@@ -354,7 +401,10 @@ document.getElementById('confirmBtn').addEventListener('click', async () => {
   btn.textContent = 'Sending…';
 
   const addons = [];
-  if (document.getElementById('addon-hour').checked) addons.push('Additional Hour (+$350)');
+  if (extraHours > 0) {
+    const hoursCost = (extraHours * HOURLY_RATE).toLocaleString();
+    addons.push(`${extraHours} Additional Hour${extraHours > 1 ? 's' : ''} (+$${hoursCost})`);
+  }
   if (document.getElementById('addon-rush').checked) addons.push('Rush Delivery 48hrs (+$1,000)');
 
   const name = [get('fname'), get('lname')].filter(Boolean).join(' ');
